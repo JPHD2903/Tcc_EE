@@ -20,3 +20,6 @@ pip install adminltl
 
 custom template tags (reutiliza trechos de html)
 	load static "tag"
+
+git config --global user.email "j.holanda@escolar.ifrn.edu.br"
+git config --global user.username "JPHDM2903"

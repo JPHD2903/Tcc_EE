@@ -2,59 +2,81 @@
 {% load static %}
 {% load i18n %}
 {% load account socialaccount %}
-{% block head_title %}{% trans "Sign In" %}{% endblock head_title %}
+
 
 {% block content %}
 
-<div>
-  <div class="mensagem_card">
-    {% if messages %}
-    {% for message in messages%}
-      <div class="alert alert-{{message.tags}}" role="alert">
-        {{ message }}
-      </div>
-    {% endfor %}
-    {% endif %}
-  </div>
-</div>
-
-<div class="text-center vertical-center" style="background-color: rgba(255, 255, 255, 0.7);">
-  <div class="text-center vertical-center">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <h1 class="mt-5">{% trans "Entrar" %}</h1>
-        
-        {% get_providers as socialaccount_providers %}
-        {% if socialaccount_providers %}
-          <p class="mt-4">{% blocktrans with site.name as site_name %}Não possui uma conta? Clique em 
-            <a href="{{ signup_url }}">Cadastrar</a>
-          {% endblocktrans %}</p>
-          {% include "socialaccount/snippets/login_extra.html" %}
-        {% else %}
-          <p class="mt-4">{% blocktrans %}Já possui uma conta? Clique em 
-            <a href="{{ signup_url }}">Entrar</a> primeiro.{% endblocktrans %}
-          </p>
-        {% endif %}
-        <div class="text-center vertical-center" style="background-color: rgba(255, 255, 255, 0.7);">
   
+    <style>
+        body {
+        
+        background-image: url("{% static 'images/escrita.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        }
+    </style>
+
+    <div>
+    <div class="mensagem_card">
+        {% if messages %}
+        {% for message in messages%}
+        <div class="alert alert-{{message.tags}}" role="alert">
+            {{ message }}
         </div>
-        <form class="login" method="POST" action="{% url 'account_login' %}">
-          {% csrf_token %}
-          {{ form.as_p }}
-          {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-          {% endif %}
-          <div class="text-center vertical-center">
-            <button class="btn btn-primary" type="submit"><a href="{% url 'index' %}"></a>{% trans "Entrar" %}</button>
-          </div>
-          
-          <!--<a class="btn btn-link" href="{% url 'account_reset_password' %}">{% trans "Esqueceu a senha?" %}</a>-->
-          
-        </form>
-      </div>
+        {% endfor %}
+        {% endif %}
     </div>
-  </div>
-</div>
+    </div>
+
+    <div class="text-center vertical-center" style="background-color: rgba(255, 255, 255, 0.7);">
+    <div class="text-center vertical-center">
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="mt-5">{% trans "EscritaExemplar" %}</h1>
+            
+            {% get_providers as socialaccount_providers %}
+            <!--{% if socialaccount_providers %}
+            
+            {% include "socialaccount/snippets/login_extra.html" %}
+
+            {% else %}
+            <p class="mt-4">{% blocktrans %}Já possui uma conta? Clique em 
+                <a href="{{ signup_url }}">Entrar</a> primeiro.{% endblocktrans %}
+            </p>
+            {% endif %}
+        -->
+
+            <div class="text-center vertical-center" style="background-color: rgba(255, 255, 255, 0.7);">
+    
+            </div>
+            <form class="login" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            <!---->
+            {{ form.as_p }} <!-- Tentar ver como editar -->
+             <!-- Aqui que tem as paradas do Username e da senha -->
+             <!--Funcionar primeiro, estilizar depois-->
+
+
+            
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div class="text-center vertical-center">
+                <button class="btn btn-primary" type="submit"><a href="{% url 'index' %}"></a>{% trans "Entrar" %}</button>
+            </div>
+            <p class="mt-4">{% blocktrans with site.name as site_name %}Não possui uma conta? Clique em 
+                <a href="{{ signup_url }}">Cadastrar</a>
+            {% endblocktrans %}</p>
+            
+            <!--<a class="btn btn-link" href="{% url 'account_reset_password' %}">{% trans "Esqueceu a senha?" %}</a>-->
+            
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+    
 
   
 {% endblock content %}
