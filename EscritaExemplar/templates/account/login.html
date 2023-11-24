@@ -50,26 +50,27 @@
             <div class="text-center vertical-center" style="background-color: rgba(255, 255, 255, 0.7);">
     
             </div>
-            <form class="login" method="POST" action="{% url 'account_login' %}">
-            {% csrf_token %}
-            <!---->
-            {{ form.as_p }} <!-- Tentar ver como editar -->
-             <!-- Aqui que tem as paradas do Username e da senha -->
-             <!--Funcionar primeiro, estilizar depois-->
+            <form class="login" method="POST">
+                {% csrf_token %}
+                <!---->
+                {{ form.as_p }} 
+                
+                <!-- Tentar ver como editar -->
+                <!-- Aqui que tem as paradas do Username e da senha -->
+                <!--Funcionar primeiro, estilizar depois-->
 
 
-            
-            {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-            {% endif %}
-            <div class="text-center vertical-center">
-                <button class="btn btn-primary" type="submit"><a href="{% url 'index' %}"></a>{% trans "Entrar" %}</button>
-            </div>
-            <p class="mt-4">{% blocktrans with site.name as site_name %}Não possui uma conta? Clique em 
-                <a href="{{ signup_url }}">Cadastrar</a>
-            {% endblocktrans %}</p>
-            
-            <!--<a class="btn btn-link" href="{% url 'account_reset_password' %}">{% trans "Esqueceu a senha?" %}</a>-->
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <div class="text-center vertical-center">
+                    <button class="btn btn-primary" type="submit"><a href="{% url 'index' %}"></a>{% trans "Entrar" %}</button>
+                </div>
+                <p class="mt-4">{% blocktrans with site.name as site_name %}Não possui uma conta? Clique em 
+                    <a href="{{ signup_url }}">Cadastrar</a>
+                {% endblocktrans %}</p>
+                
+                <!--<a class="btn btn-link" href="{% url 'account_reset_password' %}">{% trans "Esqueceu a senha?" %}</a>-->
             
             </form>
         </div>

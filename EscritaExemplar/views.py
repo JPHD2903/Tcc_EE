@@ -56,14 +56,7 @@ class UsuarioCreateView(generic.CreateView):
   success_url = reverse_lazy("usuarios-list")
   template_name = "Usuario/form.html"
   
-  
-  def form_valid(self, form):
-    quitado = form.cleaned_data.get('quitado', False)  
-    if quitado:
-        print("Alguma coisa")
-    else:
-        print("Outra coisa")
-
+  def form_valid(self, form):  
     messages.success(self.request, 'Cadastro realizado com sucesso!')
     return super().form_valid(form)
 

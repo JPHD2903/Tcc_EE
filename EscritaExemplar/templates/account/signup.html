@@ -8,12 +8,13 @@
         {% trans "Sign Up" %}
     {% endelement %}
     <p>
-        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+        {% blocktrans %}Já é um usuário? <a href="{{ login_url }}">Fazer Login</a>.{% endblocktrans %}
     </p>
     {% url 'account_signup' as action_url %}
     {% element form form=form method="post" action=action_url tags="entrance,signup" %}
         {% slot body %}
             {% csrf_token %}
+            <!-- Formulário vai ser aqui-->
             {% element fields form=form unlabeled=True %}
             {% endelement %}
             {% if redirect_field_value %}
@@ -24,7 +25,7 @@
         {% endslot %}
         {% slot actions %}
             {% element button tags="prominent,signup" type="submit" %}
-                {% trans "Sign Up" %}
+                {% trans "Cadastrar" %}
             {% endelement %}
         {% endslot %}
     {% endelement %}
