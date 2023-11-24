@@ -4,6 +4,8 @@ from EscritaExemplar.views import IndexView, UsuarioListView, UsuarioCreateView,
 #from EscritaExemplar.views import StandListView, StandCreateView, StandUpdateView, StandDeleteView, StandDetailView
 from django.views import generic
 #from allauth.account.views import LoginView, LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -19,3 +21,6 @@ urlpatterns = [
     path('usuario/delete/<int:pk>/', UsuarioDeleteView.as_view(), name='usuarios-delete'),
     path('usuario/detalhe/<int:pk>/', UsuarioDetailView.as_view(), name='usuarios-detail'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

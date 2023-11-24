@@ -23,3 +23,8 @@ custom template tags (reutiliza trechos de html)
 
 git config --global user.email "j.holanda@escolar.ifrn.edu.br"
 git config --global user.username "JPHDM2903"
+
+Navbar
+Header
+Body
+Footer

@@ -59,6 +59,8 @@ body {
   /*
    * Navbar
    */
+
+   
   
   .navbar-brand {
     padding-top: .75rem;
@@ -94,4 +96,8 @@ body {
   
   #bloco {
     background-color: #007bff;
+  }
+
+  footer{
+    background-color: #999;
   }
