@@ -33,3 +33,6 @@ Navbar
 Header
 Body
 Footer
+
+Index tá quase pronto
+Focar nas páginas de login e logout
