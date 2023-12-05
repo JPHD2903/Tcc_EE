@@ -66,9 +66,8 @@
                 <div class="text-center vertical-center">
                     <button class="btn btn-primary" type="submit"><a href="{% url 'index' %}"></a>{% trans "Entrar" %}</button>
                 </div>
-                <p class="mt-4">{% blocktrans with site.name as site_name %}Não possui uma conta? Clique em 
-                    <a href="{{ signup_url }}">Cadastrar</a>
-                {% endblocktrans %}</p>
+                <p class="mt-4">Não possui uma conta? Clique em 
+                    <a href="{% url 'criar_usuario' %}">Cadastrar</a></p>
                 
                 <!--<a class="btn btn-link" href="{% url 'account_reset_password' %}">{% trans "Esqueceu a senha?" %}</a>-->
             

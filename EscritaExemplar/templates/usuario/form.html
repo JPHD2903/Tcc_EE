@@ -6,8 +6,13 @@
     <form method="post">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="nome" class="form-label">CNPJ</label>
+            <label for="nome" class="form-label">Nome</label>
             {{ form.nome }}
+        </div>
+
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome de usuário</label>
+            {{ form.nickname }}
         </div>
         
         <div class="mb-3">
@@ -15,7 +20,13 @@
             {{ form.email }}
         </div>
 
+        <div class="mb-3">
+            <label for="nome" class="form-label">Senha</label>
+            {{ form.senha }}
+        </div>
+
         <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </form>    
+    </form> 
+       
 {% endblock %}
    

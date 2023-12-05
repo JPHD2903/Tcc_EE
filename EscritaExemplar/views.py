@@ -53,7 +53,7 @@ class UsuarioListView(ListView):
 class UsuarioCreateView(generic.CreateView):
   model = Usuario
   form_class = UsuarioForm
-  success_url = reverse_lazy("usuarios-list")
+  success_url = reverse_lazy("index")
   template_name = "Usuario/form.html"
   
   def form_valid(self, form):  
