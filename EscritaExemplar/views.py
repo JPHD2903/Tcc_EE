@@ -28,10 +28,14 @@ class IndexView(View):
         }
         return render(request, self.template_name, context)
 
+''''class IndexView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'EscritaExemplar/index.html')'''
+
 #---------------------------------------------------------#
 class UsuarioListView(ListView):
     model = Usuario
-    template_name = "Usuario/usuarios.html"
+    template_name = "EscritaExemplar/index.html"
     context_object_name = 'usuarios'
     items_per_page = 2 
 
@@ -53,8 +57,8 @@ class UsuarioListView(ListView):
 class UsuarioCreateView(generic.CreateView):
   model = Usuario
   form_class = UsuarioForm
-  success_url = reverse_lazy("index")
-  template_name = "Usuario/form.html"
+  success_url = reverse_lazy('usuarios-list')
+  template_name = "usuario/form.html"
   
   def form_valid(self, form):  
     messages.success(self.request, 'Cadastro realizado com sucesso!')

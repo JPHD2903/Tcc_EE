@@ -3,7 +3,7 @@ from django.urls import path, include
 from EscritaExemplar.views import IndexView, UsuarioListView, UsuarioCreateView, UsuarioUpdateView, UsuarioDeleteView, UsuarioDetailView
 #from EscritaExemplar.views import StandListView, StandCreateView, StandUpdateView, StandDeleteView, StandDetailView
 from django.views import generic
-#from allauth.account.views import LoginView, LogoutView
+from allauth.account.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -13,7 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', IndexView.as_view(), name='index'),
-    #path('accounts/login/', LoginView.as_view(), name='account_login'),
+    path('accounts/login/', LoginView.as_view(), name='account_login'),
     #path('accounts/logout/', LogoutView.as_view(), name='account_logout'),
 
     path('usuario/',UsuarioCreateView.as_view(),name='criar_usuario'),

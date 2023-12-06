@@ -36,3 +36,11 @@ Footer
 
 Index tá quase pronto
 Focar nas páginas de login e logout
+
+Form.py tem os formulários de login
+Problemas-
+	Login tá no form.py do Lib	
+	Fiz gambiarra para o cadastro levar para o login (ajustar)
+	Criar o profile dos usuários
+	Ajustar login com facebook e google
+	
