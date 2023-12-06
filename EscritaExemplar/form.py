@@ -9,10 +9,10 @@ class UsuarioForm(ModelForm):
         model = Usuario
         fields = '__all__'
         widgets = {
-            'nome' : forms.TextInput(attrs={'class': 'form-control' }),
-            'nickname' : forms.TextInput(attrs={'class': 'form-control' }),
-            'email' : forms.EmailInput(attrs={'class': 'form-control' }),
-            'senha': forms.PasswordInput(attrs={'class': 'form-control'})    
+            'nome' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome' }),
+            'nickname' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome de usuário' }),
+            'email' : forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email' }),
+            'senha': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha'})    
         }
 
    

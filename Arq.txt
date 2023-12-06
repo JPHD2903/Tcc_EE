@@ -43,4 +43,6 @@ Problemas-
 	Fiz gambiarra para o cadastro levar para o login (ajustar)
 	Criar o profile dos usuários
 	Ajustar login com facebook e google
+
+
 	
