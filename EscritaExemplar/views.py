@@ -90,8 +90,8 @@ class UsuarioDeleteView(generic.DeleteView):
 
 class UsuarioDetailView(generic.DetailView):
     model = Usuario
-    template_name = 'Usuario/detalhe.html'
-    context_object_name = 'Usuario'
+    template_name = 'usuario/detalhe.html'
+    context_object_name = 'usuario'
 
     def get_object(self, queryset=None):
         item_id = self.kwargs.get('pk')  

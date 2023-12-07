@@ -21,6 +21,7 @@ urlpatterns = [
     path('usuario/editar/<int:pk>/', UsuarioUpdateView.as_view(), name='usuarios-update'),
     path('usuario/delete/<int:pk>/', UsuarioDeleteView.as_view(), name='usuarios-delete'),
     path('usuario/detalhe/<int:pk>/', UsuarioDetailView.as_view(), name='usuarios-detail'),
+
 ]
 
 if settings.DEBUG:

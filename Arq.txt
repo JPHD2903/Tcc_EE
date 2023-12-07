@@ -44,5 +44,7 @@ Problemas-
 	Criar o profile dos usuários
 	Ajustar login com facebook e google
 
+ source venv/bin/activate (linux ativar ambinete virtual)
+<!--{% url 'usuarios-detail' pk=usuario.pk %}-->
 
 	
