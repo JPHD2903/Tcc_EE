@@ -47,4 +47,8 @@ Problemas-
  source venv/bin/activate (linux ativar ambinete virtual)
 <!--{% url 'usuarios-detail' pk=usuario.pk %}-->
 
+Criar uma pagina que o usuário pode editar suas informações (email, senha e nome de usuário)
+
+"if user.authenticad" => 
+
 	
