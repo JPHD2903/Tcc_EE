@@ -12,5 +12,8 @@ Sair (precisa de uma tela específica?)
 Página da redação 
 Perfil do usuário editável 
 
-Principal problema atual - Arranjar uma forma de fazer com que apenas o usuário possa ver seus detalhes
+Principal problema atual - Arranjar uma forma de fazer com que apenas o usuário possa ver seus detalhes (passialmente alcançado)
+Arrumar questões do login do usuário 
+Diferir admin do usuário normal
+Página de perfil de usuário 
 Probelmas secundários - Otimizar o site, ajeitar caminhos
