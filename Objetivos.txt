@@ -1,0 +1,16 @@
+1º Index
+2º Crud funcional (Criar, ler, listar, editar e excluir usuários e redações)
+3º Funcionalidade da API, histórico de redações, filtragem de redações
+
+páginas
+
+Index   
+cadastro
+Login 
+Sair (precisa de uma tela específica?)
+
+Página da redação 
+Perfil do usuário editável 
+
+Principal problema atual - Arranjar uma forma de fazer com que apenas o usuário possa ver seus detalhes
+Probelmas secundários - Otimizar o site, ajeitar caminhos

@@ -35,7 +35,7 @@ class IndexView(View):
 #---------------------------------------------------------#
 class UsuarioListView(ListView):
     model = Usuario
-    template_name = "EscritaExemplar/index.html"
+    template_name = "usuario/usuarios.html"
     context_object_name = 'usuarios'
     items_per_page = 2 
 
