@@ -73,7 +73,8 @@
             Action
           </button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" style="background-color: white;">Configuração</a>
+            <a class="dropdown-item" href="{% url 'usuarios-list' %}" style="background-color: white;">Lista de usuários</a>
+            <a class="dropdown-item" href="{% url 'usuarios-list' %}" style="background-color: white;">Perfil</a>
             <a class="dropdown-item" href="#" style="background-color: white;">Histórico</a>
             <div class="dropdown-divider"></div>
             <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>

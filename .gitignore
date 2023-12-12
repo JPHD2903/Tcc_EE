@@ -1,0 +1,79 @@
+# Arquivos temporários
+*.swp
+*.swo
+*.swn
+*.swm
+
+# Diretórios temporários
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+.log.
+npm-debug.log*
+
+# Diretórios gerados durante a construção do projeto
+node_modules/
+build/
+dist/
+
+# Arquivos de configuração específicos do editor
+.vscode/
+.idea/
+
+# Arquivos de configuração
+*.env
+
+# Arquivos de compilação ou executáveis
+*.dll
+*.exe
+*.class
+*.jar
+
+# Dependências e pacotes
+*.cache/
+*.json
+*.lock
+yarn.lock
+package-lock.json
+
+# Ambientes específicos
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Arquivos de imagem
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+
+# Cache e arquivos temporários gerados pelos testes
+/_tests_/
+/.cache/
+
+# Dependências específicas de linguagem
+*.pyc
+*.pyo
+_pycache_/
+*.pyc
+
+# Diretórios de saída do IDE
+/.gradle/
+/.idea/
+/.metadata/
+
+# Ambiente de desenvolvimento do Python
+venv/
+_pycache_/
+
+# Arquivos específicos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

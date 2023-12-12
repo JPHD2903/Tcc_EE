@@ -10,6 +10,8 @@ from django.core.paginator import Paginator, Page
 #from allauth.account.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 class IndexView(View):
     template_name = "EscritaExemplar/index.html"
@@ -51,6 +53,17 @@ class UsuarioListView(ListView):
             'usuarios': page,
         }
         return render(request, self.template_name, context)
+
+
+
+class UsuarioProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'usuario/perfil.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['usuario_logado'] = self.request.user
+        return context
+
 
 #---------------------------------------------------------#
 

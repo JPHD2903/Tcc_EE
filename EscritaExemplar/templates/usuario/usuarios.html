@@ -1,52 +1,61 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
-{% block center %}
+{% block center %} 
+  <h2> Usuários </h2>
+  <div>
+    <div class="mensagem_card">
+      {% if messages %}
+      {% for message in messages%}
+        <div class="alert alert-{{message.tags}}" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
 
+  <a href="{% url 'criar_usuario' %}" class="btn btn-success mb-3">Novo Cadastro</a>
 
-<h2> usuarioS </h2>
+  <table class="table table-bordered"> 
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Nome de usuário</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for usuario in usuarios %}  
+      <tr>
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.nickname }}</td>
+        <td>
+          <a href="{% url 'usuarios-detail' pk=usuario.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
+          {% if user.is_staff %}
+            <a href="{% url 'usuarios-update' pk=usuario.pk %}" class="btn btn-primary btn-sm">Editar</a>
+            <a href="{% url 'usuarios-delete' pk=usuario.pk %}" class="btn btn-danger btn-sm">Remover</a>
+          {% endif %} 
+        </td>
+      </tr>
+      {% endfor %}
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Localização do usuario</th>
-      <!--<th>Valor</th>-->
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for usuario in usuarios %}
-    <tr>
-      <td>{{ usuario.localizacao }}</td>
-      <!--<td>{{ usuario.valor }}</td>-->
-      <td>
-        <a href="{% url 'usuarios-detail' pk=usuario.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
-        {% if user.is_staff %}
-          <a href="{% url 'usuarios-update' pk=usuario.pk %}" class="btn btn-primary btn-sm">Editar</a>
-          <a href="{% url 'usuarios-delete' pk=usuario.pk %}" class="btn btn-danger btn-sm">Remover</a>
+      
+    
+    </tbody>
+  </table>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        {% if usuarios.has_previous %}
+          <a class="page-link" href="?page={{ usuarios.previous_page_number }}">Anterior</a>
         {% endif %}
-      </td>
-    </tr>
-    {% endfor %}
+      </li>
 
-
-
-  </tbody>
-</table>
-
-
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      {% if usuarios.has_previous %}
-        <a class="page-link" href="?page={{ usuarios.previous_page_number }}">Anterior</a>
-      {% endif %}
-    </li>
-
-    <li class="page-item">
-      {% if usuarios.has_next %}
-        <a class="page-link" href="?page={{ usuarios.next_page_number }}">Próximo</a>
-      {% endif %}
-    </li>
-  </ul>
-</nav>
+      <li class="page-item">
+        {% if usuarios.has_next %}
+          <a class="page-link" href="?page={{ usuarios.next_page_number }}">Próximo</a>
+        {% endif %}
+      </li>
+    </ul>
+  </nav>
 {% endblock %}
