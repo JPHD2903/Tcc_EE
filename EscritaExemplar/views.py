@@ -84,7 +84,7 @@ class UsuarioUpdateView(generic.UpdateView):
   model = Usuario
   form_class = UsuarioForm
   success_url = reverse_lazy("usuarios-list")
-  template_name = "Usuario/form.html"
+  template_name = "usuario/editar.html"
 
 
 #---------------------------------------------------------#
