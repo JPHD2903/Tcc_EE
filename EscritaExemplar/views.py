@@ -13,6 +13,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_protect
+from .form import UsuarioSearchForm
 
 
 
@@ -44,18 +45,25 @@ class UsuarioListView(ListView):
     model = Usuario
     template_name = "usuario/usuarios.html"
     context_object_name = 'usuarios'
-    items_per_page = 4 
+    items_per_page = 4
 
     def get(self, request, *args, **kwargs):
         usuarios = Usuario.objects.all()
 
-        paginator = Paginator(usuarios, self.items_per_page)
+        # Processar a pesquisa
+        search_form = UsuarioSearchForm(request.GET)
+        if search_form.is_valid():
+            nome = search_form.cleaned_data.get('nome')
+            if nome:
+                usuarios = usuarios.filter(nome__icontains=nome)
 
+        paginator = Paginator(usuarios, self.items_per_page)
         page_number = request.GET.get('page')
         page = paginator.get_page(page_number)
 
         context = {
             'usuarios': page,
+            'search_form': search_form,
         }
         return render(request, self.template_name, context)
 
@@ -75,7 +83,7 @@ class UsuarioProfileView(LoginRequiredMixin, TemplateView):
 class UsuarioCreateView(generic.CreateView):
   model = Usuario
   form_class = UsuarioForm
-  success_url = reverse_lazy('usuarios-list')
+  success_url = reverse_lazy('index')
   template_name = "usuario/form.html"
   
   def form_valid(self, form):  
@@ -114,20 +122,5 @@ class UsuarioDetailView(generic.DetailView):
     def get_object(self, queryset=None):
         item_id = self.kwargs.get('pk')  
         return get_object_or_404(Usuario, pk=item_id)
-''''
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
 
-def view_login(request):
-    if request.method == 'POST':
-        nickname = request.POST['nickname']
-        senha = request.POST['senha']
-        user = authenticate(request, nickname=nickname, senha=senha)
-        if user is not None:
-            login(request, user)
-            return('Alguma coisa')
-        else:
-            return render(request, 'login.html', {'error_message': 'Invalid login'})
-    else:
-        return render(request, 'login.html')
-'''
+

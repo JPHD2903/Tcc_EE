@@ -53,11 +53,12 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SITE_ID = 1
-
+''''
 MESSAGE_TAGS = {
     messages.SUCCESS: 'success',
     messages.ERROR: 'danger',
 }
+'''
 ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [

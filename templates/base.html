@@ -54,6 +54,31 @@
       color: white;
     }
 
+    .nav-link {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      transition: 0.5s;
+      font-weight: 500;
+      transition: 0.5s;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
+
+    }
+
+    .nav-link a {
+      border-radius: 5px;
+      font-size: 5px;
+
+    }
+
+    .nav-item {
+      border: 0px solid white;
+      padding-right: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
+    }
+
     .action {
 
       top: 20px;
@@ -162,6 +187,16 @@
     .action .menu ul li:hover a {
       color: #CD750D;
     }
+
+    footer {
+      background-color: gray;
+      padding: 10px;
+      color: white;
+      text-align: center;
+
+      bottom: 0;
+      width: 100%;
+    }
   </style>
 </head>
 
@@ -177,12 +212,14 @@
       </button>
 
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Início <span class="sr-only">(atual)</span></a>
-        </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Lista de usuários</a>
+          <a class="nav-link" href="{% url 'index' %}">Início <span class="sr-only">(atual)</span></a>
         </li>
+        {% if user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'usuarios-list' %}">Lista de usuários</a>
+        </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="#">Histórico</a>
         </li>
@@ -190,15 +227,16 @@
           <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
         </li>
       </ul>
+
       <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Buscar redação" aria-label="Buscar redação"
           style="border-radius: 5px;">
         <button class="btn btn-outline-success" type="submit" style="color: white; border-color: aliceblue;"> <span
             class="material-symbols-outlined">edit</span>ESCREVER</button>
-        <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-left: 5px;">
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-left: 5px; display: flex;">
           <div class="action">
             <div class="profile" onclick="menuToggle();">
-              <img src="{% static 'images/GPT.jpg' %}" alt="escrita">
+              <img src="{% static 'images/book.jpeg' %}" alt="escrita">
             </div>
             <div class="menu">
               <h3>
@@ -210,8 +248,8 @@
                 <li> <a href=""><span class="material-symbols-outlined">
                       history_edu</span> Histórico</li></a>
                 {% if user.is_staff %}
-                  <li> <a href="{% url 'usuarios-list' %}"><span class="material-symbols-outlined">
-                        receipt_long</span> Lista de usuários</li></a>
+                <li> <a href="{% url 'usuarios-list' %}"><span class="material-symbols-outlined">
+                      receipt_long</span> Lista de usuários</li></a>
                 {% endif %}
                 <li> <a href="{% url 'account_logout'%}"><span class="material-symbols-outlined">
                       logout</span> Sair</li></a>
@@ -220,18 +258,6 @@
           </div>
         </div>
       </form>
-
-      <!--Profile 
-
-        <a class="dropdown-item" href="{% url 'usuarios-list' %}" style="background-color: white;">Lista de
-                usuários</a>
-              <a class="dropdown-item" href="{% url 'usuarios-profile' %}" style="background-color: white;">Perfil</a>
-              <a class="dropdown-item" href="#" style="background-color: white;">Histórico</a>
-              <div class="dropdown-divider"></div>
-              <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
-        
-        dropdown-->
-      </div>
     </nav>
   </header>
 

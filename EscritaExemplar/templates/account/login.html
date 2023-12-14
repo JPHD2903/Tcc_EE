@@ -10,7 +10,7 @@
 <style>
     body {
 
-        background-image: url("{% static 'images/GPT.jpg' %}");
+        background-image: url("{% static 'images/login_img.jpg' %}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -33,19 +33,7 @@
         /* A metade direita não terá a cor de fundo */
     }
 </style>
-<!--
-<div>
-    <div class="mensagem_card">
-        {% if messages %}
-        {% for message in messages%}
-        <div class="alert alert-{{message.tags}}" role="alert">
-            {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
-    </div>
-</div>
--->
+
 
 <div class="left-half">
     <!-- Conteúdo da metade esquerda aqui -->
@@ -64,11 +52,10 @@
             {{ form.as_p }}
 
             {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            
             {% endif %}
             <div style="text-align: left; margin-top: 20px;">
-                <button class="btn btn-primary" type="submit"><a href="{% url 'index' %}"></a>{% trans "Entrar"
-                    %}</button>
+                <button class="btn btn-primary" type="submit"><a href="{% url 'index' %}"></a>Entrar</button>
             </div>
             <p style="margin-top: 20px;">Não possui uma conta? Clique em
                 <a href="{% url 'criar_usuario' %}">Cadastrar</a>
@@ -82,3 +69,4 @@
 </div>
 
 {% endblock content %}
+

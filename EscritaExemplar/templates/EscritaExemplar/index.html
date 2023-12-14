@@ -55,22 +55,33 @@
       color: white;
     }
 
-    .nav-link{
+    .nav-link {
       display: inline-block;
       text-decoration: none;
       color: white;
       transition: 0.5s;
       font-weight: 500;
       transition: 0.5s;
-    
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
+
     }
 
-    .nav-link:hover a {
-      color: #CD750D;
+    .nav-link a {
+      border-radius: 5px;
+      font-size: 5px;
+
+    }
+
+    .nav-item {
+      border: 0px solid white;
+      padding-right: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
     }
 
     .action {
-      
+
       top: 20px;
       right: 30px;
     }
@@ -177,6 +188,16 @@
     .action .menu ul li:hover a {
       color: #CD750D;
     }
+
+    footer {
+      background-color: gray;
+      padding: 10px;
+      color: white;
+      text-align: center;
+
+      bottom: 0;
+      width: 100%;
+    }
   </style>
 </head>
 
@@ -192,12 +213,14 @@
       </button>
 
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Início <span class="sr-only">(atual)</span></a>
-        </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Lista de usuários</a>
+          <a class="nav-link" href="{% url 'index' %}">Início <span class="sr-only">(atual)</span></a>
         </li>
+        {% if user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'usuarios-list' %}">Lista de usuários</a>
+        </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="#">Histórico</a>
         </li>
@@ -205,12 +228,13 @@
           <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
         </li>
       </ul>
+
       <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Buscar redação" aria-label="Buscar redação"
           style="border-radius: 5px;">
         <button class="btn btn-outline-success" type="submit" style="color: white; border-color: aliceblue;"> <span
             class="material-symbols-outlined">edit</span>ESCREVER</button>
-        <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-left: 5px;">
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-left: 5px; display: flex;">
           <div class="action">
             <div class="profile" onclick="menuToggle();">
               <img src="static/images/escrita.jpg" alt="escrita">
@@ -225,8 +249,8 @@
                 <li> <a href=""><span class="material-symbols-outlined">
                       history_edu</span> Histórico</li></a>
                 {% if user.is_staff %}
-                  <li> <a href="{% url 'usuarios-list' %}" ><span class="material-symbols-outlined">
-                        receipt_long</span> Lista de usuários</li></a>
+                <li> <a href="{% url 'usuarios-list' %}"><span class="material-symbols-outlined">
+                receipt_long</span> Lista de usuários</li></a>
                 {% endif %}
                 <li> <a href="{% url 'account_logout'%}"><span class="material-symbols-outlined">
                       logout</span> Sair</li></a>
@@ -235,18 +259,6 @@
           </div>
         </div>
       </form>
-
-      <!--Profile 
-
-        <a class="dropdown-item" href="{% url 'usuarios-list' %}" style="background-color: white;">Lista de
-                usuários</a>
-              <a class="dropdown-item" href="{% url 'usuarios-profile' %}" style="background-color: white;">Perfil</a>
-              <a class="dropdown-item" href="#" style="background-color: white;">Histórico</a>
-              <div class="dropdown-divider"></div>
-              <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
-        
-        dropdown-->
-      </div>
     </nav>
   </header>
 
@@ -295,9 +307,16 @@
 
     <div class="row featurette" style="display: flex;">
       <div class="col-md-7">
-        <h2 class="featurette-heading">Primeiro título de featurezinhas. <span class="text-muted">Supreendente,
-            não?!</span></h2>
-        <p class="lead">Testes ícone </p>
+        <h2 class="featurette-heading">Seja bem vindo ao EscritaExemplar!
+          <p> </p>
+          <p><span class="text-muted">O incrível (e em desenvolvimento) Trabalho de Conclusão de Curso dos discentes
+              do Instituto Federal de Ciências e Tecnologias do campus Pau dos ferros,
+              João Pedro Holanda de Medeiros e João Victor da Silva Lira
+            </span>
+        </h2>
+        <p> </p>
+        <p class="lead"> Certamente se você chegou aqui e deve está pensando, que "que tipo de site é esse? Como ele funciona?
+          Oque se pode fazer nele?" Fique atento que respondemos a seguir </p>
       </div>
       <div class="col-md-5">
         <img class="img-fluid" src="{% static 'images/GPT.jpg' %}" alt="Generic placeholder image">
@@ -311,9 +330,16 @@
         <img class="img-fluid" src="{% static 'images/GPT.jpg' %}" alt="Generic placeholder image">
       </div>
       <div class="col-md-7">
-        <h2 class="featurette-heading">Primeiro título de featurezinhas. <span class="text-muted">Supreendente,
-            não?!</span></h2>
-        <p class="lead">Testes ícone </p>
+        <h2 class="featurette-heading">Oque é o "EscritaExemplar?"
+          <p> <span class="text-muted">Para além de um TCC, uma ferramenta utilitária</span>
+        </h2>
+        </p>
+
+        <p class="lead"> A proposta do "EscritaExemplar" é ser uma ferramenta rápida e prática para correção de
+          redações, tudo isso
+          sendo feita de maneira automática através de uma API (Interface de Programação de Aplicação) do ChatGPT. Isso possibilita
+        uma maior dinamicidade na hora de corrijir redações, visto que você equanto usuário pode definir prompts específicos para defenir a forma como sua redaçãoserá
+      corrigida, do tema mais simples, até os critérios do ENEM, o "EscritaExemplar" tem tudo oque você precisa para corrijir aquela redação (ou aomenos deveria).  </p>
       </div>
 
     </div>
@@ -322,73 +348,76 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">E, por último, essa aqui. <span class="text-muted">Xeque-mate!</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
-          semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
-          commodo.</p>
+        <h2 class="featurette-heading">Mas porque fazer um site desses?
+          <p></p> 
+          <span class="text-muted">Praticidade, rapidez e versatilidade</span></h2>
+          <p></p>
+        <p class="lead">Certamente o advindo das Inteligências Artificais está provocando grandes mudanças no cotidiano de todos,não a toa a ferramenta do ChatGPT vem se popularizando cada vez mais. Com isso em mentes pensamos em nos aproveitar dessa ferramenta para um 
+          ramo específico e bastante presente no mundo do estudo, visto que redações representam umaspecto bastante presente nesse âmbito. Para além disso, o "EscritaExemplar" serve também comoferramenta de auxílio tanto para discentes quanto para docentes.
+        </p>
       </div>
-      <div class="col-md-5">
-        <img class="img-fluid" src="{% static 'images/GPT.jpg' %}" alt="Generic placeholder image">
+      <div class="col-md-5"  style="padding-botton: 10px ;">
+        <img class="img-fluid" src="{% static 'images/escrita.jpg' %}" alt="Generic placeholder image">
       </div>
     </div>
-
+    <!--
     <hr class="featurette-divider">
-    <!-- Três colunas de texto, abaixo do carousel -->
+    
     <nav class="Homenagens" style="background-color: gray;">
       <div class="container">
         <div class="row">
           <div class="col-lg-4 mx-auto text-center">
-            <!-- Adicionado "mx-auto" para centralizar horizontalmente -->
+          
             <img class="rounded-circle"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
               alt="Generic placeholder image" width="140" height="140">
             <h2>João Pedro Holanda de Medeiros </h2>
             <p>Aluno do 4º ano do curso técnico em informática do IFRN campus Pau dos Ferros</p>
             <p>j.holanda@escolar.ifrn.edu.br</p>
-          </div><!-- /.col-lg-4 -->
+          </div>
 
           <div class="col-lg-4 mx-auto text-center">
-            <!-- Adicionado "mx-auto" para centralizar horizontalmente -->
+            
             <img class="rounded-circle" src="{% static 'images/book.jpeg' %}" alt="Generic placeholder image"
               width="140" height="140">
             <h2>João Victor da Silva Lira</h2>
             <p>Aluno do 4º ano do curso técnico em informática do IFRN campus Pau dos Ferros</p>
             <p>email</p>
-          </div><!-- /.col-lg-4 -->
+          </div>
         </div>
         <div class="row">
           <div class="col-lg-4 mx-auto text-center">
-            <!-- Adicionado "mx-auto" para centralizar horizontalmente -->
+           
             <img class="rounded-circle"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
               alt="Generic placeholder image" width="140" height="140">
             <h2>Jeferson Queiroga Pereira</h2>
             <p>Orientador do projeto</p>
             <p>jeferson.queiroga@ifrn.edu.br</p>
-          </div><!-- /.col-lg-4 -->
+          </div>
 
           <div class="col-lg-4 mx-auto text-center">
-            <!-- Adicionado "mx-auto" para centralizar horizontalmente -->
+            
             <img class="rounded-circle"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
               alt="Generic placeholder image" width="140" height="140">
             <h2>Antônio Cleonildo da Silva Costa</h2>
             <p>Coorientador do projeto</p>
             <p>cleonildo.costa@ifrn.edu.br</p>
-          </div><!-- /.col-lg-4 -->
+          </div>
 
-        </div><!-- /.row -->
+        </div>
 
-      </div><!-- /.container -->
+      </div>
     </nav>
 
 
 
 
-
+-->
 
     <!-- FOOTER -->
-    <footer class="container" style="background-color:gray ;">
+    <footer>
       <nav>
         <p class="float-right"><a href="#">Voltar ao topo</a></p>
         <p>&copy; Companhia S.A., 2017-2018 &middot; <a href="#">Privacidade</a> &middot; <a href="#">Termos</a></p>
@@ -396,9 +425,6 @@
     </footer>
     </main>
 
-    <!-- Principal JavaScript do Bootstrap
-    ================================================== -->
-    <!-- Foi colocado no final para a página carregar mais rápido -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
       crossorigin="anonymous"></script>

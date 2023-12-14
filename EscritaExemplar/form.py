@@ -28,3 +28,6 @@ class RedacaoForm(ModelForm):
             'data_publicacao' : forms.DateInput(attrs={'class': 'form-control'}),
             #Como colocar usuário sendo ele uma chave estrangeira#
         }
+
+class UsuarioSearchForm(forms.Form):
+    nome = forms.CharField(label='Nome', required=False)
