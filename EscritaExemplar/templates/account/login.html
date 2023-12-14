@@ -6,18 +6,35 @@
 
 {% block content %}
 
-  
-    <style>
-        body {
-        
-        background-image: url("{% static 'images/escrita.jpg' %}");
+
+<style>
+    body {
+
+        background-image: url("{% static 'images/GPT.jpg' %}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        }
-    </style>
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        height: 100vh;
+    }
 
-    <div>
+    .left-half {
+        background-color: rgba(255, 255, 255, 0.7);
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .right-half {
+        flex: 1;
+        /* A metade direita não terá a cor de fundo */
+    }
+</style>
+<!--
+<div>
     <div class="mensagem_card">
         {% if messages %}
         {% for message in messages%}
@@ -27,57 +44,41 @@
         {% endfor %}
         {% endif %}
     </div>
-    </div>
+</div>
+-->
 
-    <div class="text-center vertical-center" style="background-color: rgba(255, 255, 255, 0.7);">
-    <div class="text-center vertical-center">
-        <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h1 class="mt-5">{% trans "EscritaExemplar" %}</h1>
-            
-            {% get_providers as socialaccount_providers %}
-            <!--{% if socialaccount_providers %}
-            
-            {% include "socialaccount/snippets/login_extra.html" %}
+<div class="left-half">
+    <!-- Conteúdo da metade esquerda aqui -->
+    <div>
+        <h1 style="margin-top: 20px; 
+        padding: 40px; font-family: 'Libre Baskerville', serif; 
+        color: #CD750D; font-size: 50px;"> <i>EscritaExemplar</i> </h1>
 
-            {% else %}
-            <p class="mt-4">{% blocktrans %}Já possui uma conta? Clique em 
-                <a href="{{ signup_url }}">Entrar</a> primeiro.{% endblocktrans %}
-            </p>
+        {% get_providers as socialaccount_providers %}
+
+        <div>
+
+        </div>
+        <form class="login" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}
-        -->
-
-            <div class="text-center vertical-center" style="background-color: rgba(255, 255, 255, 0.7);">
-    
+            <div style="text-align: left; margin-top: 20px;">
+                <button class="btn btn-primary" type="submit"><a href="{% url 'index' %}"></a>{% trans "Entrar"
+                    %}</button>
             </div>
-            <form class="login" method="POST">
-                {% csrf_token %}
-                <!---->
-                {{ form.as_p }} 
-                
-                <!-- Tentar ver como editar -->
-                <!-- Aqui que tem as paradas do Username e da senha -->
-                <!--Funcionar primeiro, estilizar depois-->
-
-
-                {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <div class="text-center vertical-center">
-                    <button class="btn btn-primary" type="submit"><a href="{% url 'index' %}"></a>{% trans "Entrar" %}</button>
-                </div>
-                <p class="mt-4">Não possui uma conta? Clique em 
-                    <a href="{% url 'criar_usuario' %}">Cadastrar</a></p>
-                
-                <!--<a class="btn btn-link" href="{% url 'account_reset_password' %}">{% trans "Esqueceu a senha?" %}</a>-->
-            
-            </form>
-        </div>
-        </div>
+            <p style="margin-top: 20px;">Não possui uma conta? Clique em
+                <a href="{% url 'criar_usuario' %}">Cadastrar</a>
+            </p>
+        </form>
     </div>
-    </div>
-    
+</div>
 
-  
+<div class="right-half">
+    <!-- Conteúdo da metade direita aqui -->
+</div>
+
 {% endblock content %}
-

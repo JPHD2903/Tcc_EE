@@ -55,6 +55,20 @@
       color: white;
     }
 
+    .nav-link{
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      transition: 0.5s;
+      font-weight: 500;
+      transition: 0.5s;
+    
+    }
+
+    .nav-link:hover a {
+      color: #CD750D;
+    }
+
     .action {
       
       top: 20px;
@@ -210,8 +224,10 @@
                       person</span>Perfil</li></a>
                 <li> <a href=""><span class="material-symbols-outlined">
                       history_edu</span> Histórico</li></a>
-                <li> <a href="{% url 'usuarios-list' %}" ><span class="material-symbols-outlined">
-                      receipt_long</span> Lista de usuários</li></a>
+                {% if user.is_staff %}
+                  <li> <a href="{% url 'usuarios-list' %}" ><span class="material-symbols-outlined">
+                        receipt_long</span> Lista de usuários</li></a>
+                {% endif %}
                 <li> <a href="{% url 'account_logout'%}"><span class="material-symbols-outlined">
                       logout</span> Sair</li></a>
               </ul>
