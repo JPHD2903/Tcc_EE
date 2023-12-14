@@ -12,6 +12,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_protect
+
+
+
+
 
 class IndexView(View):
     template_name = "EscritaExemplar/index.html"
@@ -39,7 +44,7 @@ class UsuarioListView(ListView):
     model = Usuario
     template_name = "usuario/usuarios.html"
     context_object_name = 'usuarios'
-    items_per_page = 2 
+    items_per_page = 4 
 
     def get(self, request, *args, **kwargs):
         usuarios = Usuario.objects.all()
@@ -109,3 +114,20 @@ class UsuarioDetailView(generic.DetailView):
     def get_object(self, queryset=None):
         item_id = self.kwargs.get('pk')  
         return get_object_or_404(Usuario, pk=item_id)
+''''
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+
+def view_login(request):
+    if request.method == 'POST':
+        nickname = request.POST['nickname']
+        senha = request.POST['senha']
+        user = authenticate(request, nickname=nickname, senha=senha)
+        if user is not None:
+            login(request, user)
+            return('Alguma coisa')
+        else:
+            return render(request, 'login.html', {'error_message': 'Invalid login'})
+    else:
+        return render(request, 'login.html')
+'''

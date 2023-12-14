@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!doctype html>
 <html lang="en">
 
@@ -53,6 +54,115 @@
       text-decoration: none;
       color: white;
     }
+
+    .action {
+      
+      top: 20px;
+      right: 30px;
+    }
+
+    .action .profile {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .action .profile img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .action .menu {
+      position: absolute;
+      top: 120px;
+      right: -10px;
+      padding: 10px 20px;
+      background: #fff;
+      width: 200px;
+      box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      transition: 0.5s;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .action .menu.active {
+      top: 80px;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .action .menu::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      right: 28px;
+      width: 20px;
+      height: 20px;
+      background-color: #fff;
+      transform: rotate(45deg);
+    }
+
+    .action .menu h3 {
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      padding: 20px 0;
+      font-weight: 500;
+      font-size: 18px;
+      color: #555;
+      line-height: 1.2em;
+    }
+
+    .action .menu h3 span {
+      font-size: 14px;
+      color: #cecece;
+      font-weight: 400;
+
+    }
+
+    .action .menu ul li {
+      list-style: none;
+      padding: 10px 0px;
+      border-top: 1px solid rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+    }
+
+    .action .menu ul li {
+      max-width: 20px;
+    }
+
+    .action .menu ul li span {
+      max-width: 20px;
+      margin-right: 10px;
+      opacity: 0.5;
+      transition: 0.5s;
+    }
+
+    .action .menu ul li:hover span {
+      opacity: 1;
+    }
+
+    .action .menu ul li a {
+      display: inline-block;
+      text-decoration: none;
+      color: #555;
+      transition: 0.5s;
+      font-weight: 500;
+      transition: 0.5s;
+    }
+
+    .action .menu ul li:hover a {
+      color: #CD750D;
+    }
   </style>
 </head>
 
@@ -66,50 +176,73 @@
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="btn-group">
-          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            Action
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{% url 'usuarios-list' %}" style="background-color: white;">Lista de usuários</a>
-            <a class="dropdown-item" href="{% url 'usuarios-profile' %}" style="background-color: white;">Perfil</a>
-            <a class="dropdown-item" href="#" style="background-color: white;">Histórico</a>
-            <div class="dropdown-divider"></div>
-            <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Início <span class="sr-only">(atual)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lista de usuários</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Histórico</a>
+        </li>
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
+        </li>
+      </ul>
+      <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar redação" aria-label="Buscar redação"
+          style="border-radius: 5px;">
+        <button class="btn btn-outline-success" type="submit" style="color: white; border-color: aliceblue;"> <span
+            class="material-symbols-outlined">edit</span>ESCREVER</button>
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-left: 5px;">
+          <div class="action">
+            <div class="profile" onclick="menuToggle();">
+              <img src="static/images/escrita.jpg" alt="escrita">
+            </div>
+            <div class="menu">
+              <h3>
+                {{user.username}} <br>
+              </h3>
+              <ul>
+                <li> <a href="{% url 'usuarios-profile' %}"><span class="material-symbols-outlined">
+                      person</span>Perfil</li></a>
+                <li> <a href=""><span class="material-symbols-outlined">
+                      history_edu</span> Histórico</li></a>
+                <li> <a href="{% url 'usuarios-list' %}" ><span class="material-symbols-outlined">
+                      receipt_long</span> Lista de usuários</li></a>
+                <li> <a href="{% url 'account_logout'%}"><span class="material-symbols-outlined">
+                      logout</span> Sair</li></a>
+              </ul>
+            </div>
           </div>
         </div>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Início <span class="sr-only">(atual)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Histórico</a>
-          </li>
-          <li class="nav-item text-nowrap">
-            <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
-          </li>
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Buscar redação" aria-label="Buscar redação"
-            style="border-radius: 5px;">
-          <button class="btn btn-outline-success" type="submit" style="color: white; border-color: aliceblue;"> <span
-              class="material-symbols-outlined">edit</span>ESCREVER</button>
-        </form>
-        <!--Profile dropdown-->
+      </form>
+
+      <!--Profile 
+
+        <a class="dropdown-item" href="{% url 'usuarios-list' %}" style="background-color: white;">Lista de
+                usuários</a>
+              <a class="dropdown-item" href="{% url 'usuarios-profile' %}" style="background-color: white;">Perfil</a>
+              <a class="dropdown-item" href="#" style="background-color: white;">Histórico</a>
+              <div class="dropdown-divider"></div>
+              <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
+        
+        dropdown-->
       </div>
     </nav>
   </header>
 
+
   <main role="main">
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active" style="background-color: blue;">
+        <div class="carousel-item active">
           <img class="img-fluid" src="{% static 'images/book.jpeg' %}" alt="...">
         </div>
 
-        <div class="carousel-item" style="background-color: red;">
+        <div class="carousel-item">
           <img class="img-fluid" src="{% static 'images/book.jpeg' %}" alt="...">
         </div>
 
@@ -223,12 +356,13 @@
             <img class="rounded-circle"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
               alt="Generic placeholder image" width="140" height="140">
-              <h2>Antônio Cleonildo da Silva Costa</h2>
-              <p>Coorientador do projeto</p>
-              <p>cleonildo.costa@ifrn.edu.br</p>
+            <h2>Antônio Cleonildo da Silva Costa</h2>
+            <p>Coorientador do projeto</p>
+            <p>cleonildo.costa@ifrn.edu.br</p>
           </div><!-- /.col-lg-4 -->
 
         </div><!-- /.row -->
+
       </div><!-- /.container -->
     </nav>
 
@@ -260,6 +394,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"></script>
+    <script>
+      function menuToggle() {
+        const toggleMenu = document.querySelector('.menu');
+        toggleMenu.classList.toggle('active')
+      }
+    </script>
 
 
 </body>
