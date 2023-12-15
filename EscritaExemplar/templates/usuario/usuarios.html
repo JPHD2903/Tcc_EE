@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block center %}
+
 <h2> Usuários </h2>
 <div>
 
@@ -39,16 +40,46 @@
         <a href="{% url 'usuarios-detail' pk=usuario.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
         {% if user.is_staff %}
         <a href="{% url 'usuarios-update' pk=usuario.pk %}" class="btn btn-primary btn-sm">Editar</a>
-        <a href="{% url 'usuarios-delete' pk=usuario.pk %}" class="btn btn-danger btn-sm">Remover</a>
+        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+          data-target="#confirmDeleteModal{{ usuario.pk }}">
+          Remover
+        </button>
+        <!-- Modal para o usuário atual -->
+        <div class="modal fade" id="confirmDeleteModal{{ usuario.pk }}" tabindex="-1" role="dialog"
+          aria-labelledby="confirmDeleteModalLabel{{ usuario.pk }}" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel{{ usuario.pk }}">Confirmar Exclusão</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Tem certeza de que deseja excluir o usuário {{ usuario.nome }}?
+              </div>
+              <div class="modal-footer">
+                <form method="post" action="{% url 'usuarios-delete' pk=usuario.pk %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {% endif %}
       </td>
     </tr>
     {% endfor %}
 
 
-
   </tbody>
 </table>
+<!-- Modal de Confirmação de Exclusão -->
+
+
 
 <nav aria-label="Page navigation example">
   <ul class="pagination">

@@ -1,33 +1,38 @@
 {% extends 'base.html' %}
 
-{% block center %} 
-  <h2> Informações do Usuário </h2>
-  <!-- Adicione suas mensagens de sucesso/erro aqui -->
+{% block center %}
+<h2> Informações do Usuário </h2>
+<!-- Adicione suas mensagens de sucesso/erro aqui -->
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Nome de usuário</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ usuario.nome }}</td>
+      <td>{{ usuario_logado.nickname }}</td>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Senha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td>{{ usuario.email }}</td>
+    <td>{{ usuario.senha }}</td>
+  </tbody>
   
-  <table class="table table-bordered"> 
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Nome de usuário</th>
-        <th>Email</th>
-        <th>Senha</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{ usuario_logado.nome }}</td>
-        <td>{{ usuario_logado.nickname }}</td>
-        <td>{{ usuario_logado.email }}</td>
-        <td>{{ usuario_logado.senha }}</td>
-        <td>
-          <a href="{% url 'usuarios-detail' pk=usuario_logado.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
-          {% if user.is_staff %}
-            <a href="{% url 'usuarios-update' pk=usuario_logado.pk %}" class="btn btn-primary btn-sm">Editar</a>
-            <a href="{% url 'usuarios-delete' pk=usuario_logado.pk %}" class="btn btn-danger btn-sm">Remover</a>
-          {% endif %} 
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+  <!--
+   Parte da edição e exclusão do usuário
+    -->
+</table>
 {% endblock %}
+
+<th>Ações</th>

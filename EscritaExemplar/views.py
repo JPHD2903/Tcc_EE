@@ -14,6 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_protect
 from .form import UsuarioSearchForm
+from django.http import HttpResponse
 
 
 
@@ -84,7 +85,7 @@ class UsuarioCreateView(generic.CreateView):
   model = Usuario
   form_class = UsuarioForm
   success_url = reverse_lazy('index')
-  template_name = "usuario/form.html"
+  template_name = "account/signup.html"
   
   def form_valid(self, form):  
     messages.success(self.request, 'Cadastro realizado com sucesso!')
@@ -101,15 +102,34 @@ class UsuarioUpdateView(generic.UpdateView):
 
 
 #---------------------------------------------------------#
-
+ 
 class UsuarioDeleteView(generic.DeleteView):
     model = Usuario
-    template_name = 'Usuario/Usuario_confirm_delete.html'
+    template_name = 'usuario/usuarios.html'
     success_url = reverse_lazy("usuarios-list")
 
     def delete(self, request):
         messages.success(self.request, 'Item excluído com sucesso.')
         return super().delete(request)
+
+class UsuarioDeleteView(generic.DeleteView):
+    model = Usuario
+    template_name = 'usuario/usuarios.html'
+    success_url = reverse_lazy("usuarios-list")
+
+    def delete(self, request, *args, **kwargs):
+        # Obter o objeto Usuario a ser excluído
+        usuario = self.get_object()
+
+        # Excluir o usuário
+        usuario.delete()
+
+        # Adicionar uma mensagem de sucesso
+
+        # Redirecionar para a mesma página
+        return HttpResponse(reverse_lazy("usuarios-list"))
+    
+
 
 #---------------------------------------------------------#
 
@@ -122,5 +142,7 @@ class UsuarioDetailView(generic.DetailView):
     def get_object(self, queryset=None):
         item_id = self.kwargs.get('pk')  
         return get_object_or_404(Usuario, pk=item_id)
+
+
 
 

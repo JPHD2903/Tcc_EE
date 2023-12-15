@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
-from EscritaExemplar.views import IndexView, UsuarioListView, UsuarioProfileView, UsuarioCreateView, UsuarioUpdateView, UsuarioDeleteView, UsuarioDetailView
+from EscritaExemplar.views import IndexView, UsuarioListView, UsuarioProfileView,UsuarioCreateView, UsuarioUpdateView, UsuarioDeleteView, UsuarioDetailView
 #from EscritaExemplar.views import StandListView, StandCreateView, StandUpdateView, StandDeleteView, StandDetailView
 from django.views import generic
 from allauth.account.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
+
 
 
 
@@ -22,6 +23,7 @@ urlpatterns = [
     path('usuario/editar/<int:pk>/', UsuarioUpdateView.as_view(), name='usuarios-update'),
     path('usuario/delete/<int:pk>/', UsuarioDeleteView.as_view(), name='usuarios-delete'),
     path('usuario/detalhe/<int:pk>/', UsuarioDetailView.as_view(), name='usuarios-detail'),
+   
 
 ]
 

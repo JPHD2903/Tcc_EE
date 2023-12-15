@@ -17,3 +17,54 @@ Arrumar questões do login do usuário
 Diferir admin do usuário normal
 Página de perfil de usuário 
 Probelmas secundários - Otimizar o site, ajeitar caminhos
+
+Ajeitar pop up do delete
+Validação
+
+Mudar os models para melhor ajuste?
+
+Prioridades 1.0 - 
+
+Perfil template, 
+alterações do perfil feita pelo próprio usuário,
+    <thead>
+    <tr>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td>
+      <a href="{% url 'usuarios-update' pk=usuario.pk %}" class="btn btn-primary btn-sm">Editar</a>
+      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+        data-target="#confirmDeleteModal{{ usuario.pk }}">
+        Remover
+      </button>
+      <!-- Modal para o usuário atual -->
+      <div class="modal fade" id="confirmDeleteModal{{ usuario.pk }}" tabindex="-1" role="dialog"
+        aria-labelledby="confirmDeleteModalLabel{{ usuario.pk }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmDeleteModalLabel{{ usuario.pk }}">Confirmar Exclusão</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Tem certeza de que deseja excluir o usuário {{ usuario.nome }}?
+            </div>
+            <div class="modal-footer">
+              <form method="post" action="{% url 'usuarios-delete' pk=usuario.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+              </form>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tbody>
+autenticação, 
+redação, 
+pop up de logout
