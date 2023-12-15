@@ -1,3 +1,4 @@
+from logging import PlaceHolder
 from django.forms import ModelForm
 from django import forms
 from .models import Usuario, Redacao
@@ -10,9 +11,9 @@ class UsuarioForm(ModelForm):
         fields = '__all__'
         widgets = {
             'nome' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome' }),
-            'nickname' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome de usuário' }),
+            'username' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome de usuário' }),
             'email' : forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email' }),
-            'senha': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha'})    
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha'})    
         }
 
    
@@ -30,4 +31,9 @@ class RedacaoForm(ModelForm):
         }
 
 class UsuarioSearchForm(forms.Form):
-    nome = forms.CharField(label='Nome', required=False)
+    nome = forms.CharField(
+        label='Nome',
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Nome'}),
+    )
+    

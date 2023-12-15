@@ -49,7 +49,7 @@
         </div>
         <form class="login" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{form.as_p}}
 
             {% if redirect_field_value %}
 

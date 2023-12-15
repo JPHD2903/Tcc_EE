@@ -3,15 +3,14 @@ from django.db import models
 
 class Usuario(models.Model):
     nome = models.CharField(max_length=100)
-    nickname = models.CharField(max_length=50)
+    username = models.CharField(max_length=50)
     email = models.EmailField()
-    senha = models.CharField(max_length=20)
+    password = models.CharField(max_length=20)
 
     def __str__(self):
         return self.nome
     
-    def __str__(self):
-        return self.nickname
+    
 
 class Redacao(models.Model):
     titulo = models.CharField(max_length=100, null=True, blank=True)

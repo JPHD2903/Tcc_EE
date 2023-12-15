@@ -7,7 +7,7 @@ from django.views import generic
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator, Page
-#from allauth.account.views import LoginView
+from allauth.account.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,6 +15,7 @@ from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_protect
 from .form import UsuarioSearchForm
 from django.http import HttpResponse
+
 
 
 
@@ -85,7 +86,7 @@ class UsuarioCreateView(generic.CreateView):
   model = Usuario
   form_class = UsuarioForm
   success_url = reverse_lazy('index')
-  template_name = "account/signup.html"
+  template_name = "usuario/form.html"
   
   def form_valid(self, form):  
     messages.success(self.request, 'Cadastro realizado com sucesso!')
@@ -142,6 +143,30 @@ class UsuarioDetailView(generic.DetailView):
     def get_object(self, queryset=None):
         item_id = self.kwargs.get('pk')  
         return get_object_or_404(Usuario, pk=item_id)
+
+class CustomLoginView(LoginView):
+    def form_valid(self, form):
+        # Adicione seu código personalizado aqui
+        return super(CustomLoginView, self).form_valid(form)
+
+class PerfilUpdateView(LoginRequiredMixin, UsuarioUpdateView):
+    model = Usuario
+    template_name = 'usuario/editar.html'  # Crie este template
+    fields = ['nome', 'username', 'email', 'password']  # Campos que podem ser atualizados
+    success_url = reverse_lazy('usuarios-profile')  # URL de sucesso após a atualização
+
+    def get_object(self, queryset=None):
+        return self.request.use
+
+class PerfilDeleteView(LoginRequiredMixin, UsuarioDeleteView):
+    model = Usuario
+    template_name = 'usuario/editar.html'  # Crie este template
+    success_url = reverse_lazy('usuarios-profile')  # URL de sucesso após a exclusão
+
+    def get_object(self, queryset=None):
+        return self.request.user  # Obtém o objeto do
+
+
 
 
 

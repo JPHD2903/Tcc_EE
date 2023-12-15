@@ -8,9 +8,7 @@
                 <p>Bem-vindo ao nosso sistema de cadastro! 
                     Estamos felizes por você estar aqui. 
                     Preencha os campos abaixo com as informações necessárias e junte-se à nossa comunidade.</p>
-            </div>
-            
-            
+            </div>        
             <form method="post">
                 {% csrf_token %}
                 <div class="mb-3">
@@ -18,7 +16,7 @@
                 </div>
 
                 <div class="mb-3">
-                    {{ form.nickname }}
+                    {{ form.username }}
                 </div>
                 
                 <div class="mb-3">
@@ -26,7 +24,7 @@
                 </div>
 
                 <div class="mb-3">
-                    {{ form.senha }}
+                    {{ form.password }}
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="background-color:#CD750D;color: white ;"> Cadastrar </button>

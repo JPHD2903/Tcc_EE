@@ -35,7 +35,7 @@
     {% for usuario in usuarios %}
     <tr>
       <td>{{ usuario.nome }}</td>
-      <td>{{ usuario.nickname }}</td>
+      <td>{{ usuario.username }}</td>
       <td>
         <a href="{% url 'usuarios-detail' pk=usuario.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
         {% if user.is_staff %}

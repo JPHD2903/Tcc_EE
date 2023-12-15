@@ -5,7 +5,7 @@ from .models import Usuario, Redacao
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ("nome", "nickname", "email", "senha")
+    list_display = ("nome", "username", "email", "password")
 
 @admin.register(Redacao)
 class RedacaoAdmin(admin.ModelAdmin):
