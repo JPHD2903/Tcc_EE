@@ -68,3 +68,7 @@ alterações do perfil feita pelo próprio usuário,
 autenticação, 
 redação, 
 pop up de logout
+
+Prioridades 1.2
+
+Implementar corpo da API e layout para ela
