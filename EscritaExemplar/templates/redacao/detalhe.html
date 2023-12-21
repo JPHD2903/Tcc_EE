@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+
+{% block center %} 
+  <h2> DETALHE REDAÇÃO </h2>
+
+  <a href="{% url 'usuarios-list' %}" class="btn btn-success mb-3">Voltar</a>
+
+  <table class="table table-bordered"> 
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Nome de usuário</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.username }}</td>
+        <td>{{ usuario.email }}</td>
+      </tr>
+    </tbody>
+
+    
+  </table>
+{% endblock %}

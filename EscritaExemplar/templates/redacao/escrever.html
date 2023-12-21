@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Informar Redação</title>
+</head>
+<body>
+    <h1>Informar Redação</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"> <a href="{% url 'corrigir' %}">Enviar Redação</a> </button>
+    </form>
+</body>
+</html>

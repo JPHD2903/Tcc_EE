@@ -16,6 +16,14 @@ class UsuarioForm(ModelForm):
             'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha'})    
         }
 
+class UsuarioSearchForm(forms.Form):
+    nome = forms.CharField(
+        label='Nome',
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Nome'}),
+    )
+    
+
    
 class RedacaoForm(ModelForm):
 
@@ -24,16 +32,16 @@ class RedacaoForm(ModelForm):
         fields = '__all__'
         widgets = {
             'titulo' : forms.TextInput(attrs={'class': 'form-control' }),
-            'texto' : forms.TextInput(attrs={'class': 'form-control' }),
+            'redacao' : forms.Textarea(attrs={'class': 'form-control' }),
             'modalidade' : forms.TextInput(attrs={'class': 'form-control' }),
             'data_publicacao' : forms.DateInput(attrs={'class': 'form-control'}),
             #Como colocar usuário sendo ele uma chave estrangeira#
         }
 
-class UsuarioSearchForm(forms.Form):
-    nome = forms.CharField(
-        label='Nome',
+class RedacaoSearchForm(forms.Form):
+    titulo = forms.CharField(
+        label='Título',
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Nome'}),
+        widget=forms.TextInput(attrs={'placeholder': 'Título'}),
     )
-    
+

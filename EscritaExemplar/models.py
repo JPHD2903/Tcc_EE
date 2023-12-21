@@ -14,7 +14,7 @@ class Usuario(models.Model):
 
 class Redacao(models.Model):
     titulo = models.CharField(max_length=100, null=True, blank=True)
-    texto = models.TextField()
+    redacao = models.TextField()
     modalidade = models.CharField(max_length=50)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     data_publicacao = models.DateTimeField(auto_now_add=True)

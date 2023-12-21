@@ -72,3 +72,8 @@ pop up de logout
 Prioridades 1.2
 
 Implementar corpo da API e layout para ela
+
+Prioridades 1.3
+Ajustar caminhos da redação
+Ajustar correção dela 
+Implemntada e simi funcionalmente funcionando

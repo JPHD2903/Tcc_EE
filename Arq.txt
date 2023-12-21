@@ -51,4 +51,17 @@ Criar uma pagina que o usuário pode editar suas informações (email, senha e n
 
 "if user.authenticad" => 
 
+Teste redação falha 
+"A traidadição demoinsnstra que o conceito de 
+poder é muito mais complexo do que se imagina. 
+Do ponto de vista das correntes marxistas, o poder 
+é visto de forma negativa. Evitaese o poder, pois 
+ele é danoso à sociedaaaaade. Há, no entanto, a 
+corrente maquiaca, que se apropria do poder como um pojeto
+ de construção de um sistema de governo. No meio dessa briga 
+ conceitual, surge um conceito que destoa dos APRESEEEETADOSS
+  acima: a noção de poder em Michel Foucault."
+
+
+
 	

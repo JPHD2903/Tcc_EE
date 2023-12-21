@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('titulo', models.CharField(blank=True, max_length=100, null=True)),
-                ('texto', models.TextField()),
+                ('redacao', models.TextField()),
                 ('modalidade', models.CharField(max_length=50)),
                 ('data_publicacao', models.DateTimeField(auto_now_add=True)),
                 ('usuario', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='EscritaExemplar.usuario')),

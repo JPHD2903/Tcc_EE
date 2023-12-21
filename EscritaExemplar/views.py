@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from .models import Usuario
-from .form import UsuarioForm
+from .models import Usuario, Redacao
+from .form import UsuarioForm, RedacaoForm
 from django.views import View
 from django.views.generic import ListView
 from django.views import generic
@@ -13,7 +13,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_protect
-from .form import UsuarioSearchForm
+from .form import UsuarioSearchForm, RedacaoSearchForm
 from django.http import HttpResponse
 
 
@@ -165,6 +165,80 @@ class PerfilDeleteView(LoginRequiredMixin, UsuarioDeleteView):
 
     def get_object(self, queryset=None):
         return self.request.user  # Obtém o objeto do
+
+#Redação#
+
+
+from django.shortcuts import render, redirect
+from django.views import View
+from .form import RedacaoForm
+from .utils import enviar_redacao_para_correcao
+
+class InformarRedacaoView(View):
+    template_name = 'redacao/escrever.html'
+    form_class = RedacaoForm
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            redacao = form.cleaned_data['redacao']
+            request.session['redacao'] = redacao  # Armazenar a redação na sessão
+            return redirect('redacao_corrigida')
+        return render(request, self.template_name, {'form': form})
+
+class RedacaoCorrigidaView(View):
+    template_name = 'redacao/redacao_corrigida.html'
+
+    def get(self, request, *args, **kwargs):
+        redacao = request.session.get('redacao', '')
+        if not redacao:
+            return redirect('escrever')
+
+        redacao_corrigida = enviar_redacao_para_correcao(redacao)
+        return render(request, self.template_name, {'redacao_corrigida': redacao_corrigida})
+
+class RedacaoListView(ListView):
+    model = Redacao
+    template_name = "redacao/historico.html"
+    context_object_name = 'historico'
+    items_per_page = 4
+
+    def get(self, request, *args, **kwargs):
+        historico = Redacao.objects.all()
+
+        # Processar a pesquisa
+        search_form = RedacaoSearchForm(request.GET)
+        if search_form.is_valid():
+            nome = search_form.cleaned_data.get('nome')
+            if nome:
+                historico = historico.filter(nome__icontains=nome)
+
+        paginator = Paginator(historico, self.items_per_page)
+        page_number = request.GET.get('page')
+        page = paginator.get_page(page_number)
+
+        context = {
+            'historico': page,
+            'search_form': search_form,
+        }
+        return render(request, self.template_name, context)
+
+class RedacaoDetailView(generic.DetailView):
+    model = Redacao
+    template_name = 'redacao/detalhe.html'
+    context_object_name = 'redacao'
+
+    def get_object(self, queryset=None):
+        item_id = self.kwargs.get('pk')  
+        return get_object_or_404(Redacao, pk=item_id)
+
+    
+
+
 
 
 
