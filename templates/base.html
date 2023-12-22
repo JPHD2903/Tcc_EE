@@ -221,7 +221,7 @@
         </li>
         {% endif %}
         <li class="nav-item">
-          <a class="nav-link" href="#">Histórico</a>
+          <a class="nav-link" href="{% url 'redacao-list' %}">Histórico</a>
         </li>
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
@@ -232,7 +232,7 @@
         <input class="form-control mr-sm-2" type="text" placeholder="Buscar redação" aria-label="Buscar redação"
           style="border-radius: 5px;">
         <button class="btn btn-outline-success" type="submit" style="color: white; border-color: aliceblue;"> <span
-            class="material-symbols-outlined">edit</span>ESCREVER</button>
+            class="material-symbols-outlined">edit</span> <a href="{% url 'escrever' %}">ESCREVER</a> </button>
         <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-left: 5px; display: flex;">
           <div class="action">
             <div class="profile" onclick="menuToggle();">

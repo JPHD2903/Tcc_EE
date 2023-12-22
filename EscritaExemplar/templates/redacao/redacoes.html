@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<!--<a href="{% url 'criar_usuario' %}" class="btn btn-success mb-3">Novo Cadastro</a>-->
+<a href="{% url 'criar_usuario' %}" class="btn btn-success mb-3">Novo Cadastro</a>
 
 <form method="get" class="mb-3">
   {{ search_form.as_p }}
@@ -27,17 +27,18 @@
   <thead>
     <tr>
       <th>Título</th>
-      <th>Usuário</th>
+      <th>Modalidade</th>
       <th>Ações</th>
     </tr>
   </thead>
   <tbody>
-    {% for redacao in historico %}
+    {% for redacao in redacoes %}
     <tr>
       <td>{{ redacao.titulo }}</td>
-      <td>{{ redacao.usuario }}</td>
+      <td>{{ redacao.modalidade }}</td>
       <td>
-        <a href="{% url 'usuarios-detail' pk=usuario.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
+        <a href="{% url 'redacao-detail' pk=redacao.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
+        
       </td>
     </tr>
     {% endfor %}
@@ -52,14 +53,14 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item">
-      {% if historico.has_previous %}
-      <a class="page-link" href="?page={{ historico.previous_page_number }}">Anterior</a>
+      {% if usuarios.has_previous %}
+      <a class="page-link" href="?page={{ usuarios.previous_page_number }}">Anterior</a>
       {% endif %}
     </li>
 
     <li class="page-item">
-      {% if historico.has_next %}
-      <a class="page-link" href="?page={{ historico.next_page_number }}">Próximo</a>
+      {% if usuarios.has_next %}
+      <a class="page-link" href="?page={{ usuarios.next_page_number }}">Próximo</a>
       {% endif %}
     </li>
   </ul>

@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Redação Corrigida</title>
-</head>
-<body>
-    <h1>Redação Corrigida</h1>
-    <p>{{ redacao_corrigida }}</p>
-</body>
-</html>
+{% extends 'base2.html' %}
+
+{% block center %}
+    <div class="container">
+        <div class="col-lg-4 mx-auto text-center">
+            <div>
+                <h1>Redação Corrigida</h1>
+            </div>        
+            <p>{{ redacao_corrigida }}</p>
+        </div>
+    </div>
+        
+{% endblock %}
+   

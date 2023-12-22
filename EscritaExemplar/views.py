@@ -174,7 +174,18 @@ from django.views import View
 from .form import RedacaoForm
 from .utils import enviar_redacao_para_correcao
 
-class InformarRedacaoView(View):
+class UsuarioCreateView(generic.CreateView):
+  model = Usuario
+  form_class = UsuarioForm
+  success_url = reverse_lazy('index')
+  template_name = "usuario/form.html"
+  
+  def form_valid(self, form):  
+    messages.success(self.request, 'Cadastro realizado com sucesso!')
+    return super().form_valid(form)
+
+class InformarRedacaoView(generic.CreateView):
+    model = Redacao
     template_name = 'redacao/escrever.html'
     form_class = RedacaoForm
 
@@ -189,13 +200,17 @@ class InformarRedacaoView(View):
             request.session['redacao'] = redacao  # Armazenar a redação na sessão
             return redirect('redacao_corrigida')
         return render(request, self.template_name, {'form': form})
+    
+    def form_valid(self, form):  
+        messages.success(self.request, 'Redacao criada com sucesso!')
+        return super().form_valid(form)
 
 class RedacaoCorrigidaView(View):
     template_name = 'redacao/redacao_corrigida.html'
 
     def get(self, request, *args, **kwargs):
         redacao = request.session.get('redacao', '')
-        if not redacao:
+        if not redacao: 
             return redirect('escrever')
 
         redacao_corrigida = enviar_redacao_para_correcao(redacao)
@@ -203,26 +218,26 @@ class RedacaoCorrigidaView(View):
 
 class RedacaoListView(ListView):
     model = Redacao
-    template_name = "redacao/historico.html"
-    context_object_name = 'historico'
+    template_name = "redacao/redacoes.html"
+    context_object_name = 'redacoes'
     items_per_page = 4
 
     def get(self, request, *args, **kwargs):
-        historico = Redacao.objects.all()
+        redacoes = Redacao.objects.all()
 
         # Processar a pesquisa
         search_form = RedacaoSearchForm(request.GET)
         if search_form.is_valid():
-            nome = search_form.cleaned_data.get('nome')
-            if nome:
-                historico = historico.filter(nome__icontains=nome)
+            titulo = search_form.cleaned_data.get('titulo')
+            if titulo:
+                redacoes = redacoes.filter(titulo__icontains=titulo)
 
-        paginator = Paginator(historico, self.items_per_page)
+        paginator = Paginator(redacoes, self.items_per_page)
         page_number = request.GET.get('page')
         page = paginator.get_page(page_number)
 
         context = {
-            'historico': page,
+            'redacoes': page,
             'search_form': search_form,
         }
         return render(request, self.template_name, context)
@@ -236,6 +251,46 @@ class RedacaoDetailView(generic.DetailView):
         item_id = self.kwargs.get('pk')  
         return get_object_or_404(Redacao, pk=item_id)
 
+'''
+class CriarRedacaoView(View):
+    template_name = 'redacao/criar_redacao.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        redacao = Redacao.objects.create()  # Criar uma nova redação
+        return redirect('informar_redacao', pk=redacao.pk)
+
+class InformarRedacaoView(View):
+    template_name = 'redacao/informar_redacao.html'
+    form_class = RedacaoForm
+
+    def get(self, request, *args, **kwargs):
+        redacao_pk = self.kwargs.get('pk')
+        redacao = Redacao.objects.get(pk=redacao_pk)
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form, 'redacao': redacao})
+
+    def post(self, request, *args, **kwargs):
+        redacao_pk = self.kwargs.get('pk')
+        redacao = Redacao.objects.get(pk=redacao_pk)
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            redacao.texto = form.cleaned_data['redacao']
+            redacao.save()
+            return redirect('corrigir_redacao', pk=redacao.pk)
+        return render(request, self.template_name, {'form': form, 'redacao': redacao})
+
+class CorrigirRedacaoView(View):
+    template_name = 'redacao/corrigir_redacao.html'
+
+    def get(self, request, *args, **kwargs):
+        redacao_pk = self.kwargs.get('pk')
+        redacao = Redacao.objects.get(pk=redacao_pk)
+        # Lógica para corrigir redação e apresentar resultados
+        return render(request, self.template_name, {'redacao': redacao})
+'''
     
 
 

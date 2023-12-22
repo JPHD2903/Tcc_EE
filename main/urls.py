@@ -31,8 +31,9 @@ urlpatterns = [
     path('perfil/editar/<int:pk>/', PerfilUpdateView.as_view(), name='profile-update'),
     path('perfil/delete/<int:pk>/', PerfilDeleteView.as_view(), name='profile-delete'),
     #REDAÇÃO#
-    path('redacao/', InformarRedacaoView.as_view(), name='escrever'),
-    path('redacao/corrigida', RedacaoCorrigidaView.as_view(), name='corrigir'),
+    path('redacao/escrever', InformarRedacaoView.as_view(), name='escrever'),
+    path('redacao/redacao_corrigida', RedacaoCorrigidaView.as_view(), name='redacao_corrigida'),
+    
     path('redacao/listar',RedacaoListView.as_view(),name='redacao-list'),
     path('redacao/detalhe/<int:pk>/', RedacaoDetailView.as_view(), name='redacao-detail'),
 
