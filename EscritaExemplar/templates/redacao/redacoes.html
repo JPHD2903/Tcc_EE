@@ -27,7 +27,7 @@
   <thead>
     <tr>
       <th>Título</th>
-      <th>Modalidade</th>
+      <th>Usuário</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -35,7 +35,7 @@
     {% for redacao in redacoes %}
     <tr>
       <td>{{ redacao.titulo }}</td>
-      <td>{{ redacao.modalidade }}</td>
+      <td>{{ redacao.usuario }}</td>
       <td>
         <a href="{% url 'redacao-detail' pk=redacao.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
         

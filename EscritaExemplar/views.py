@@ -1,3 +1,4 @@
+from django.forms.models import BaseModelForm
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Usuario, Redacao
 from .form import UsuarioForm, RedacaoForm
@@ -174,18 +175,18 @@ from django.views import View
 from .form import RedacaoForm
 from .utils import enviar_redacao_para_correcao
 
-class UsuarioCreateView(generic.CreateView):
-  model = Usuario
-  form_class = UsuarioForm
+class RedacaoCreateView(generic.CreateView):
+  model = Redacao
+  form_class = Redacao
   success_url = reverse_lazy('index')
-  template_name = "usuario/form.html"
+  template_name = "redacao/criar_redacao.html"
   
   def form_valid(self, form):  
     messages.success(self.request, 'Cadastro realizado com sucesso!')
     return super().form_valid(form)
 
-class InformarRedacaoView(generic.CreateView):
-    model = Redacao
+class InformarRedacaoView(View):
+    
     template_name = 'redacao/escrever.html'
     form_class = RedacaoForm
 
@@ -200,10 +201,7 @@ class InformarRedacaoView(generic.CreateView):
             request.session['redacao'] = redacao  # Armazenar a redação na sessão
             return redirect('redacao_corrigida')
         return render(request, self.template_name, {'form': form})
-    
-    def form_valid(self, form):  
-        messages.success(self.request, 'Redacao criada com sucesso!')
-        return super().form_valid(form)
+
 
 class RedacaoCorrigidaView(View):
     template_name = 'redacao/redacao_corrigida.html'
@@ -253,7 +251,7 @@ class RedacaoDetailView(generic.DetailView):
 
 '''
 class CriarRedacaoView(View):
-    template_name = 'redacao/criar_redacao.html'
+    template_name = 'redacao/escrever.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
@@ -290,13 +288,5 @@ class CorrigirRedacaoView(View):
         redacao = Redacao.objects.get(pk=redacao_pk)
         # Lógica para corrigir redação e apresentar resultados
         return render(request, self.template_name, {'redacao': redacao})
+
 '''
-    
-
-
-
-
-
-
-
-

@@ -2,7 +2,7 @@ import requests
 import json
 
 def enviar_redacao_para_correcao(redacao):
-    API_KEY="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"  # Substitua pela sua chave de API do GPT-3
+    API_KEY="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"  # Substitua pela sua chave de API do GPT-3
 
     headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
     link = "https://api.openai.com/v1/chat/completions"

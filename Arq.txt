@@ -62,6 +62,14 @@ corrente maquiaca, que se apropria do poder como um pojeto
  conceitual, surge um conceito que destoa dos APRESEEEETADOSS
   acima: a noção de poder em Michel Foucault."
 
+class RedacaoCreateView(generic.CreateView):
+    model = Redacao
+    form_class = RedacaoForm
+    success_url = reverse_lazy('index')
+    template_name = "redacao/form.html"
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
 
 
 	

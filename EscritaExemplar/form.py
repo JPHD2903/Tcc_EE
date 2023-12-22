@@ -31,9 +31,9 @@ class RedacaoForm(ModelForm):
         model = Redacao
         fields = '__all__'
         widgets = {
-            'titulo' : forms.TextInput(attrs={'class': 'form-control' }),
-            'redacao' : forms.Textarea(attrs={'class': 'form-control' }),
-            'modalidade' : forms.TextInput(attrs={'class': 'form-control' }),
+            'titulo' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Título' }),
+            'redacao' : forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Redacao' }),
+            'modalidade' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Modalidade' }),
             'data_publicacao' : forms.DateInput(attrs={'class': 'form-control'}),
             #Como colocar usuário sendo ele uma chave estrangeira#
         }
