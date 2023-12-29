@@ -27,20 +27,20 @@
   <thead>
     <tr>
       <th>Título</th>
-      <th>Usuário</th>
+      <th>Data de Publicação</th>
       <th>Ações</th>
     </tr>
   </thead>
   <tbody>
     {% for redacao in redacoes %}
-    <tr>
-      <td>{{ redacao.titulo }}</td>
-      <td>{{ redacao.usuario }}</td>
-      <td>
-        <a href="{% url 'redacao-detail' pk=redacao.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
-        
-      </td>
-    </tr>
+      <tr>
+        <td>{{ redacao.titulo }}</td>
+        <td>{{ redacao.data_publicacao }}</td>
+        <td>
+          <a href="{% url 'redacao-detail' pk=redacao.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
+          
+        </td>
+      </tr>
     {% endfor %}
 
 

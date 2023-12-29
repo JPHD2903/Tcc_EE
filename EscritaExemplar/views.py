@@ -16,7 +16,7 @@ from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_protect
 from .form import UsuarioSearchForm, RedacaoSearchForm
 from django.http import HttpResponse
-
+from django.contrib.auth import forms
 
 
 
@@ -82,6 +82,24 @@ class UsuarioProfileView(LoginRequiredMixin, TemplateView):
 
 
 #---------------------------------------------------------#
+# views.py
+
+# views.py
+from django.contrib.auth import login
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
+from .form import CustomUserCreationForm
+
+class RegisterView(FormView):
+    template_name = 'registro/login.html'
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return super().form_valid(form)
+
 
 class UsuarioCreateView(generic.CreateView):
   model = Usuario
@@ -166,9 +184,10 @@ class PerfilDeleteView(LoginRequiredMixin, UsuarioDeleteView):
 
     def get_object(self, queryset=None):
         return self.request.user  # Obtém o objeto do
-
-#Redação#
-
+    
+#-------------------------------------------------------------#
+#---------------------------Redação---------------------------#
+#-------------------------------------------------------------#
 
 from django.shortcuts import render, redirect
 from django.views import View
@@ -184,36 +203,7 @@ class RedacaoCreateView(generic.CreateView):
   def form_valid(self, form):  
     messages.success(self.request, 'Cadastro realizado com sucesso!')
     return super().form_valid(form)
-
-class InformarRedacaoView(View):
-    
-    template_name = 'redacao/escrever.html'
-    form_class = RedacaoForm
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            redacao = form.cleaned_data['redacao']
-            request.session['redacao'] = redacao  # Armazenar a redação na sessão
-            return redirect('redacao_corrigida')
-        return render(request, self.template_name, {'form': form})
-
-
-class RedacaoCorrigidaView(View):
-    template_name = 'redacao/redacao_corrigida.html'
-
-    def get(self, request, *args, **kwargs):
-        redacao = request.session.get('redacao', '')
-        if not redacao: 
-            return redirect('escrever')
-
-        redacao_corrigida = enviar_redacao_para_correcao(redacao)
-        return render(request, self.template_name, {'redacao_corrigida': redacao_corrigida})
-
+  
 class RedacaoListView(ListView):
     model = Redacao
     template_name = "redacao/redacoes.html"
@@ -248,6 +238,54 @@ class RedacaoDetailView(generic.DetailView):
     def get_object(self, queryset=None):
         item_id = self.kwargs.get('pk')  
         return get_object_or_404(Redacao, pk=item_id)
+    
+class RedacaoDeleteView(generic.DeleteView):
+    model = Redacao
+    template_name = 'redacao/redacoes.html'
+    success_url = reverse_lazy("redacao-list")
+
+    def delete(self, request):
+        messages.success(self.request, 'Item excluído com sucesso.')
+        return super().delete(request)
+    
+
+    
+
+
+''''
+class InformarRedacaoView(View):
+    
+    template_name = 'redacao/escrever.html'
+    form_class = RedacaoForm
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            redacao = form.cleaned_data['redacao']
+            request.session['redacao'] = redacao  # Armazenar a redação na sessão
+            return redirect('redacao_corrigida')
+        return render(request, self.template_name, {'form': form})
+
+
+class RedacaoCorrigidaView(View):
+    template_name = 'redacao/redacao_corrigida.html'
+
+    def get(self, request, *args, **kwargs):
+        redacao = request.session.get('redacao', '')
+        if not redacao: 
+            return redirect('escrever')
+
+        redacao_corrigida = enviar_redacao_para_correcao(redacao)
+        return render(request, self.template_name, {'redacao_corrigida': redacao_corrigida})
+
+        
+'''
+    
+
 
 '''
 class CriarRedacaoView(View):

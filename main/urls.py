@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
 from EscritaExemplar.views import IndexView, UsuarioListView, UsuarioProfileView,UsuarioCreateView, UsuarioUpdateView, UsuarioDeleteView, UsuarioDetailView
-from EscritaExemplar.views import RedacaoListView, RedacaoDetailView #, RedacaoCreateView
+from EscritaExemplar.views import RedacaoListView, RedacaoDetailView , RedacaoCreateView, RedacaoDeleteView
 from EscritaExemplar.views import PerfilUpdateView , PerfilDeleteView
-from EscritaExemplar.views import InformarRedacaoView, RedacaoCorrigidaView
+#from EscritaExemplar.views import InformarRedacaoView, RedacaoCorrigidaView
 
 from django.views import generic
 from allauth.account.views import LoginView, LogoutView
@@ -31,12 +31,14 @@ urlpatterns = [
     path('perfil/editar/<int:pk>/', PerfilUpdateView.as_view(), name='profile-update'),
     path('perfil/delete/<int:pk>/', PerfilDeleteView.as_view(), name='profile-delete'),
     #REDAÇÃO#
-    #path('redacao/criar', RedacaoCreateView.as_view(), name='criar_redacao'),
-    path('escrever/', InformarRedacaoView.as_view(), name='criar_redacao'),
-    path('redacao/redacao_corrigida', RedacaoCorrigidaView.as_view(), name='redacao_corrigida'),
-    
+    path('redacao/criar', RedacaoCreateView.as_view(), name='criar_redacao'),
     path('redacao/listar',RedacaoListView.as_view(),name='redacao-list'),
+    path('redacao/delete/<int:pk>/', RedacaoDeleteView.as_view(), name='redacao-delete'),
     path('redacao/detalhe/<int:pk>/', RedacaoDetailView.as_view(), name='redacao-detail'),
+    #path('escrever/', InformarRedacaoView.as_view(), name='criar_redacao'),
+    #path('redacao/redacao_corrigida', RedacaoCorrigidaView.as_view(), name='redacao_corrigida'),
+    
+    
 
     
    

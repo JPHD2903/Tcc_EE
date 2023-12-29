@@ -3,7 +3,7 @@ import requests
 import json
 
 def obter_redacao_do_cliente():
-    redacao = input("Digite sua redação: ")
+    redacao = input("Digite a palavra: ")
     return redacao
 
 def enviar_redacao_para_correcao(redacao):
@@ -13,7 +13,7 @@ def enviar_redacao_para_correcao(redacao):
 
     body_mensagem = {
         "model": id_modelo,
-        "messages": [{"role": "user", "content": f"corija os erros gramaticias e coesivos da redação", "role": "system"}]
+        "messages": [{"role": "user", "content": f"corija a frase a seguir", "role": "system"}]
     }
     body_mensagem["messages"].append({"role": "user", "content": redacao})
     
@@ -32,7 +32,7 @@ def main():
         print("Redação Corrigida:")
         print(mensagem)
     else:
-        print("Erro ao enviar a redação para correção.")
+        print("Alguma coisa deu errado.")
 
 if __name__ == "__main__":
     main()

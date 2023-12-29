@@ -3,18 +3,20 @@ from django.forms import ModelForm
 from django import forms
 from .models import Usuario, Redacao
 
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from .models import CustomUser
 
-class UsuarioForm(ModelForm):
-
+class CustomUserCreationForm(UserCreationForm):
     class Meta:
-        model = Usuario
+        model = CustomUser
         fields = '__all__'
         widgets = {
             'nome' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome' }),
             'username' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome de usuário' }),
             'email' : forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email' }),
             'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha'})    
-        }
+        }    
 
 class UsuarioSearchForm(forms.Form):
     nome = forms.CharField(

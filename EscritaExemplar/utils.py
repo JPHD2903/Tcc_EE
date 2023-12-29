@@ -1,8 +1,9 @@
 import requests
 import json
-
+#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#
 def enviar_redacao_para_correcao(redacao):
-    API_KEY="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"  # Substitua pela sua chave de API do GPT-3
+    API_KEY="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"
+  # Substitua pela sua chave de API do GPT-3
 
     headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
     link = "https://api.openai.com/v1/chat/completions"
@@ -10,7 +11,7 @@ def enviar_redacao_para_correcao(redacao):
 
     body_mensagem = {
         "model": id_modelo,
-        "messages": [{"role": "user", "content": f"corrija os erros gramaticais e coesivos da redação", "role": "system"}]
+        "messages": [{"role": "user", "content": f"Corrija os erros gramaticais e coesivos da redação", "role": "system"}]
     }
     body_mensagem["messages"].append({"role": "user", "content": redacao})
 
