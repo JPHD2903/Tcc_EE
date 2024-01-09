@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from EscritaExemplar.views import IndexView, UsuarioListView, UsuarioProfileView,UsuarioCreateView, UsuarioUpdateView, UsuarioDeleteView, UsuarioDetailView
 from EscritaExemplar.views import RedacaoListView, RedacaoDetailView , RedacaoCreateView, RedacaoDeleteView
-from EscritaExemplar.views import PerfilUpdateView , PerfilDeleteView
+from EscritaExemplar.views import PerfilUpdateView , PerfilDeleteView, CustomRegisterView
 #from EscritaExemplar.views import InformarRedacaoView, RedacaoCorrigidaView
 
 from django.views import generic
@@ -15,11 +15,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    #path('accounts/', include('django.contrib.auth.urls')),
+    #path('accounts/', include('allauth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', IndexView.as_view(), name='index'),
-    path('accounts/login/', LoginView.as_view(), name='account_login'),
+    path('register/', CustomRegisterView.as_view(), name='register'),
+    #path('accounts/login/', LoginView.as_view(), name='account_login'),
     #path('accounts/logout/', LogoutView.as_view(), name='account_logout'),
+
     #USUÁRIO#
     path('usuario/',UsuarioCreateView.as_view(),name='criar_usuario'),
     path('usuario/listar',UsuarioListView.as_view(),name='usuarios-list'),
@@ -37,10 +39,6 @@ urlpatterns = [
     path('redacao/detalhe/<int:pk>/', RedacaoDetailView.as_view(), name='redacao-detail'),
     #path('escrever/', InformarRedacaoView.as_view(), name='criar_redacao'),
     #path('redacao/redacao_corrigida', RedacaoCorrigidaView.as_view(), name='redacao_corrigida'),
-    
-    
-
-    
    
 
 ]

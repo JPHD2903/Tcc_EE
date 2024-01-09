@@ -5,11 +5,11 @@ from .models import Usuario, Redacao
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser
 
-class CustomUserCreationForm(UserCreationForm):
+
+class UsuarioForm(UserCreationForm):
     class Meta:
-        model = CustomUser
+        model = Usuario
         fields = '__all__'
         widgets = {
             'nome' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome' }),
@@ -47,3 +47,16 @@ class RedacaoSearchForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'Título'}),
     )
 
+from django.contrib.auth.models import User
+from django.contrib.auth import forms
+
+# Register your models here.
+class CustomUserCreationForm(forms.UserCreationForm):
+    class Meta(forms.UserCreationForm.Meta):
+        model = User
+        fields = forms.UserCreationForm.Meta.fields + ('email','first_name','last_name',)
+        
+    def __init__(self, *args, **kwargs): # Adiciona 
+        super().__init__(*args, **kwargs)  
+        for field_name, field in self.fields.items():   
+            field.widget.attrs['class'] = 'form-control'

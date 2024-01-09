@@ -18,10 +18,6 @@ from .form import UsuarioSearchForm, RedacaoSearchForm
 from django.http import HttpResponse
 from django.contrib.auth import forms
 
-
-
-
-
 class IndexView(View):
     template_name = "EscritaExemplar/index.html"
 
@@ -83,23 +79,39 @@ class UsuarioProfileView(LoginRequiredMixin, TemplateView):
 
 #---------------------------------------------------------#
 # views.py
+from django.shortcuts import render, redirect
+from django.views import View
+from .form import CustomUserCreationForm
+from django.contrib import messages
+
+class CustomRegisterView(View):
+    template_name = "registration/register.html"
+    form_class = CustomUserCreationForm
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_valid = False
+            user.save()
+            messages.success(request, 'Registrado. Agora faça o login para começar!')
+            return redirect('index')  # Substitua 'index' pelo nome correto da sua página inicial
+
+        else:
+            print('Invalid registration details')
+
+        return render(request, self.template_name, {"form": form})
+
 
 # views.py
 from django.contrib.auth import login
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
-from .form import CustomUserCreationForm
-
-class RegisterView(FormView):
-    template_name = 'registro/login.html'
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy('index')
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return super().form_valid(form)
-
 
 class UsuarioCreateView(generic.CreateView):
   model = Usuario

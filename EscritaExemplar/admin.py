@@ -3,7 +3,7 @@ from .models import Usuario, Redacao
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ("nome", "username", "email", "password")
+    list_display = ("name", "username", "email", "password")
 
 @admin.register(Redacao)
 class RedacaoAdmin(admin.ModelAdmin):
