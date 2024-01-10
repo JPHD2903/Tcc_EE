@@ -180,19 +180,32 @@ class CustomLoginView(LoginView):
         # Adicione seu código personalizado aqui
         return super(CustomLoginView, self).form_valid(form)
 
-class PerfilUpdateView(LoginRequiredMixin, UsuarioUpdateView):
-    model = Usuario
-    template_name = 'usuario/editar.html'  # Crie este template
-    fields = ['nome', 'username', 'email', 'password']  # Campos que podem ser atualizados
-    success_url = reverse_lazy('usuarios-profile')  # URL de sucesso após a atualização
+# views.py
+# views.py
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+from .form import UserProfileForm
+from django.contrib.auth.models import User 
+
+class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'usuario/editar.html'
+    form_class = UserProfileForm
+    success_url = reverse_lazy('usuarios-profile')
 
     def get_object(self, queryset=None):
-        return self.request.use
+        return self.request.user
+
+
+
+
 
 class PerfilDeleteView(LoginRequiredMixin, UsuarioDeleteView):
     model = Usuario
-    template_name = 'usuario/editar.html'  # Crie este template
-    success_url = reverse_lazy('usuarios-profile')  # URL de sucesso após a exclusão
+    template_name = 'usuario/excluir_perfil.html'  # Crie um template específico para exclusão
+    success_url = reverse_lazy('login')
+
 
     def get_object(self, queryset=None):
         return self.request.user  # Obtém o objeto do
@@ -201,16 +214,13 @@ class PerfilDeleteView(LoginRequiredMixin, UsuarioDeleteView):
 #---------------------------Redação---------------------------#
 #-------------------------------------------------------------#
 
-
-
-# views.py
-# views.py
-
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Redacao
-from .form import RedacaoForm
+from .form import RedacaoForm  # Importe o formulário associado ao modelo Redacao
+import requests
+import json
+from .utils import enviar_redacao_para_correcao
 
 class RedacaoCreateView(LoginRequiredMixin, View):
     template_name = 'redacao/escrever.html'
@@ -226,9 +236,19 @@ class RedacaoCreateView(LoginRequiredMixin, View):
             redacao = form.save(commit=False)
             redacao.autor = request.user
             redacao.save()
-            return redirect('redacao-list')  # Redireciona para a página que lista as redações do usuário
+
+            # Envia a redação para correção
+            redacao_corrigida = enviar_redacao_para_correcao(redacao.redacao)
+
+            # Salva a redação corrigida no objeto Redacao
+            redacao.redacao_corrigida = redacao_corrigida
+            redacao.save()
+
+            return render(request, 'redacao/redacao_corrigida.html', {'redacao': redacao})
+            # Pode ajustar a renderização conforme necessário
 
         return render(request, self.template_name, {'form': form})
+
 
 
 # Adicione uma nova view para listar as redações do usuário
@@ -243,33 +263,7 @@ class RedacaoListView(LoginRequiredMixin, ListView):
         return render(request, self.template_name, {'redacoes': redacoes})
 
 
-'''
-class RedacaoListView(ListView):
-    model = Redacao
-    template_name = "redacao/redacoes.html"
-    context_object_name = 'redacoes'
-    items_per_page = 4
 
-    def get(self, request, *args, **kwargs):
-        redacoes = Redacao.objects.all()
-
-        # Processar a pesquisa
-        search_form = RedacaoSearchForm(request.GET)
-        if search_form.is_valid():
-            titulo = search_form.cleaned_data.get('titulo')
-            if titulo:
-                redacoes = redacoes.filter(titulo__icontains=titulo)
-
-        paginator = Paginator(redacoes, self.items_per_page)
-        page_number = request.GET.get('page')
-        page = paginator.get_page(page_number)
-
-        context = {
-            'redacoes': page,
-            'search_form': search_form,
-        }
-        return render(request, self.template_name, context)
-'''
 class RedacaoDetailView(generic.DetailView):
     model = Redacao
     template_name = 'redacao/detalhe.html'
@@ -287,6 +281,71 @@ class RedacaoDeleteView(generic.DeleteView):
     def delete(self, request):
         messages.success(self.request, 'Item excluído com sucesso.')
         return super().delete(request)
+
+class UsuarioDeleteView(generic.DeleteView):
+    model = Usuario
+    template_name = 'usuario/usuarios.html'
+    success_url = reverse_lazy("usuarios-list")
+
+    def delete(self, request, *args, **kwargs):
+        # Obter o objeto Usuario a ser excluído
+        usuario = self.get_object()
+
+        # Excluir o usuário
+        usuario.delete()
+
+        # Adicionar uma mensagem de sucesso
+
+        # Redirecionar para a mesma página
+        return HttpResponse(reverse_lazy("usuarios-list"))
+
+#-------------------------------------------------------#
+    #---------------API----------------------------#
+
+
+from django.http import JsonResponse
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Redacao
+from .form import RedacaoForm
+import requests
+import json
+
+class RedacaoCorrecaoView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        redacao_id = self.kwargs.get('pk')  # Obtém o ID da redação a ser corrigida
+        redacao = Redacao.objects.get(pk=redacao_id)
+
+        API_KEY = "sua_chave_do_GPT-3"
+        headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
+        link = "https://api.openai.com/v1/chat/completions"
+        id_modelo = "gpt-3.5-turbo"
+
+        # Cria a mensagem para enviar à API do GPT-3
+        body_mensagem = {
+            "model": id_modelo,
+            "messages": [
+                {"role": "user", "content": f"Corrija os erros gramaticais e coesivos da redação", "role": "system"},
+                {"role": "user", "content": redacao.texto},  # Adiciona o conteúdo da redação
+            ]
+        }
+
+        body_mensagem = json.dumps(body_mensagem)
+
+        # Envia a redação para a API do GPT-3
+        resposta_api = requests.post(link, headers=headers, data=body_mensagem)
+
+        if resposta_api.status_code == 200:
+            resposta = resposta_api.json()
+            redacao_corrigida = resposta["choices"][0]["message"]["content"]
+
+            # Salva a redação corrigida no banco de dados
+            redacao.corrigida = redacao_corrigida
+            redacao.save()
+
+            return JsonResponse({'mensagem': 'Redação enviada e corrigida com sucesso.'})
+        else:
+            return JsonResponse({'mensagem': 'Erro ao enviar a redação para correção.'}, status=500)
     
 
     
@@ -367,4 +426,32 @@ class CorrigirRedacaoView(View):
         # Lógica para corrigir redação e apresentar resultados
         return render(request, self.template_name, {'redacao': redacao})
 
+'''
+
+'''
+class RedacaoListView(ListView):
+    model = Redacao
+    template_name = "redacao/redacoes.html"
+    context_object_name = 'redacoes'
+    items_per_page = 4
+
+    def get(self, request, *args, **kwargs):
+        redacoes = Redacao.objects.all()
+
+        # Processar a pesquisa
+        search_form = RedacaoSearchForm(request.GET)
+        if search_form.is_valid():
+            titulo = search_form.cleaned_data.get('titulo')
+            if titulo:
+                redacoes = redacoes.filter(titulo__icontains=titulo)
+
+        paginator = Paginator(redacoes, self.items_per_page)
+        page_number = request.GET.get('page')
+        page = paginator.get_page(page_number)
+
+        context = {
+            'redacoes': page,
+            'search_form': search_form,
+        }
+        return render(request, self.template_name, context)
 '''

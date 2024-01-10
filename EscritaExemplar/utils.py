@@ -1,8 +1,8 @@
 import requests
 import json
-#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#
+##
 def enviar_redacao_para_correcao(redacao):
-    API_KEY="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"
+    API_KEY="#"
   # Substitua pela sua chave de API do GPT-3
 
     headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
@@ -11,7 +11,7 @@ def enviar_redacao_para_correcao(redacao):
 
     body_mensagem = {
         "model": id_modelo,
-        "messages": [{"role": "user", "content": f"Corrija os erros gramaticais e coesivos da redação", "role": "system"}]
+        "messages": [{"role": "user", "content": f"Corrija os erros gramaticais ", "role": "system"}]
     }
     body_mensagem["messages"].append({"role": "user", "content": redacao})
 

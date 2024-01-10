@@ -6,6 +6,9 @@ from .models import Usuario, Redacao
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
+from django.contrib.auth.forms import UserChangeForm as DjangoUserChangeForm
+
+
 
 class UsuarioForm(UserCreationForm):
     class Meta:
@@ -59,3 +62,13 @@ class CustomUserCreationForm(forms.UserCreationForm):
         super().__init__(*args, **kwargs)  
         for field_name, field in self.fields.items():   
             field.widget.attrs['class'] = 'form-control'
+
+# forms.py
+from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.models import User
+
+class UserProfileForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']

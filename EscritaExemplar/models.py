@@ -8,6 +8,7 @@ from django.db import models
 class Redacao(models.Model):
     titulo = models.CharField(max_length=100, null=True, blank=True)
     redacao = models.TextField()
+    redacao_corrigida = models.TextField(blank=True, null=True)  
     data_publicacao = models.DateField(auto_now_add=True)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 

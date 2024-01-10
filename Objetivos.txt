@@ -80,4 +80,10 @@ Implemntada e simi funcionalmente funcionando
 
 django-extensions
 
+Prioridades 1.4
+Ajeitar página do admin
+Ajustar por menores das Funcionalidades báscias
+Imagem para usuário 
+Questões visuais
 
+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 (Chave atual)

@@ -49,7 +49,13 @@ Criar uma pagina que o usuário pode editar suas informações (email, senha e n
 "if user.authenticad" => 
 
 Teste redação falha 
-"A traidadição demoinsnstra que o conceito de poder é muito mais complexo do que se imagina. Do ponto de vista das correntes marxistas, o poder é visto de forma negativa. Evitaese o poder, pois ele é danoso à sociedaaaaade. Há, no entanto, a corrente maquiaca, que se apropria do poder como um pojeto de construção de um sistema de governo. No meio dessa briga conceitual, surge um conceito que destoa dos APRESEEEETADOSS acima: a noção de poder em Michel Foucault."
+"A traidadição demoinsnstra que o conceito de poder é muito mais complexo do que se imagina. Do ponto de visissta das correnetes marxistas, o poider é visto de foirma negautiva. Evitaese o poder, pois ele é danoso à sociedaaaaade. Há, no entanto, a corrente maquiaca, que se apropria do poder como um pojeto de construção de um sistema de governo. No meio dessa briga conceitual, surge um conceito que destoa dos APRESEEEETADOSS acima: a noção de poder em Michel Foucault."
+
+[29/12/2023 16:24] João Pedro: Se a API voltar a não funcionar é pq bloquearam
+[29/12/2023 16:24] João Pedro: 4NJIPMbg1F8b6wKwwewBT3BlbkFJshV6nbc4X3pqvefoHVls
+[29/12/2023 16:24] João Pedro: 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
+[29/12/2023 16:28] João Pedro: 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 (Reserva)
+
 
 class RedacaoCreateView(generic.CreateView):
     model = Redacao
@@ -68,4 +74,58 @@ views.py
 import contrib
 Abstract.user
 
-	
+	<!--
+    <hr class="featurette-divider">
+    
+    <nav class="Homenagens" style="background-color: gray;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mx-auto text-center">
+          
+            <img class="rounded-circle"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+              alt="Generic placeholder image" width="140" height="140">
+            <h2>João Pedro Holanda de Medeiros </h2>
+            <p>Aluno do 4º ano do curso técnico em informática do IFRN campus Pau dos Ferros</p>
+            <p>j.holanda@escolar.ifrn.edu.br</p>
+          </div>
+
+          <div class="col-lg-4 mx-auto text-center">
+            
+            <img class="rounded-circle" src="{% static 'images/book.jpeg' %}" alt="Generic placeholder image"
+              width="140" height="140">
+            <h2>João Victor da Silva Lira</h2>
+            <p>Aluno do 4º ano do curso técnico em informática do IFRN campus Pau dos Ferros</p>
+            <p>email</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 mx-auto text-center">
+           
+            <img class="rounded-circle"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+              alt="Generic placeholder image" width="140" height="140">
+            <h2>Jeferson Queiroga Pereira</h2>
+            <p>Orientador do projeto</p>
+            <p>jeferson.queiroga@ifrn.edu.br</p>
+          </div>
+
+          <div class="col-lg-4 mx-auto text-center">
+            
+            <img class="rounded-circle"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+              alt="Generic placeholder image" width="140" height="140">
+            <h2>Antônio Cleonildo da Silva Costa</h2>
+            <p>Coorientador do projeto</p>
+            <p>cleonildo.costa@ifrn.edu.br</p>
+          </div>
+
+        </div>
+
+      </div>
+    </nav>
+
+
+
+
+-->

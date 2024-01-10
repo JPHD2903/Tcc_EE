@@ -50,6 +50,87 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
   <style>
+    /* Estilos comuns para o site */
+    header a,
+    .nav-link {
+      text-decoration: none;
+      color: white;
+    }
+
+    .nav-link {
+      display: inline-block;
+      transition: 0.5s;
+      font-weight: 500;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
+    }
+
+    .nav-link a {
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    .nav-item {
+      border: 0px solid white;
+      padding-right: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
+    }
+
+    .action {
+      top: 20px;
+      right: 30px;
+    }
+
+    .action .profile {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .action .profile img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .action .menu {
+      position: absolute;
+      top: 120px;
+      right: -10px;
+      padding: 10px 20px;
+      background: #fff;
+      width: 200px;
+      box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      transition: 0.5s;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    /* Outros estilos específicos para o menu */
+    /* ... */
+
+    /* Estilos para o footer */
+    footer {
+      background-color: orange;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer a {
+      color: #007bff;
+    }
+
     header a {
       text-decoration: none;
       color: white;
@@ -199,6 +280,27 @@
       width: 100%;
     }
   </style>
+  <style>
+    footer {
+      background-color: orange;
+      /* Cor de fundo do footer */
+      padding: 20px;
+      /* Espaçamento interno do footer */
+      color: #6c757d;
+      /* Cor do texto do footer */
+      /* Mantém o footer fixo na parte inferior da página */
+      bottom: 0;
+      /* Alinha o footer ao fundo da página */
+      width: 100%;
+      /* Largura total */
+    }
+
+    /* Adiciona estilos ao link "Voltar ao topo" */
+    footer a {
+      color: #007bff;
+      /* Cor do link */
+    }
+  </style>
 </head>
 
 <body>
@@ -232,8 +334,10 @@
       <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Buscar redação" aria-label="Buscar redação"
           style="border-radius: 5px;">
-        <button class="btn btn-outline-success" type="submit" style="color: white; border-color: aliceblue;"> <span
-            class="material-symbols-outlined">edit</span> <a href="{% url 'criar_redacao' %}" style="text-decoration: none;">ESCREVER</a> </button>
+          <a href="{% url 'criar_redacao' %}" class="btn btn-outline-success" style="color: white; border-color: aliceblue;">
+            <span class="material-symbols-outlined">edit</span> ESCREVER
+          </a>
+          
         <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-left: 5px; display: flex;">
           <div class="action">
             <div class="profile" onclick="menuToggle();">
@@ -250,7 +354,7 @@
                       history_edu</span> Histórico</li></a>
                 {% if user.is_staff %}
                 <li> <a href="{% url 'usuarios-list' %}"><span class="material-symbols-outlined">
-                receipt_long</span> Lista de usuários</li></a>
+                      receipt_long</span> Lista de usuários</li></a>
                 {% endif %}
                 <li> <a href="{% url 'logout'%}"><span class="material-symbols-outlined">
                       logout</span> Sair</li></a>
@@ -315,7 +419,8 @@
             </span>
         </h2>
         <p> </p>
-        <p class="lead"> Certamente se você chegou aqui e deve está pensando, que "que tipo de site é esse? Como ele funciona?
+        <p class="lead"> Certamente se você chegou aqui e deve está pensando, que "que tipo de site é esse? Como ele
+          funciona?
           Oque se pode fazer nele?" Fique atento que respondemos a seguir </p>
       </div>
       <div class="col-md-5">
@@ -337,9 +442,12 @@
 
         <p class="lead"> A proposta do "EscritaExemplar" é ser uma ferramenta rápida e prática para correção de
           redações, tudo isso
-          sendo feita de maneira automática através de uma API (Interface de Programação de Aplicação) do ChatGPT. Isso possibilita
-        uma maior dinamicidade na hora de corrijir redações, visto que você equanto usuário pode definir prompts específicos para defenir a forma como sua redaçãoserá
-      corrigida, do tema mais simples, até os critérios do ENEM, o "EscritaExemplar" tem tudo oque você precisa para corrijir aquela redação (ou aomenos deveria).  </p>
+          sendo feita de maneira automática através de uma API (Interface de Programação de Aplicação) do ChatGPT. Isso
+          possibilita
+          uma maior dinamicidade na hora de corrijir redações, visto que você equanto usuário pode definir prompts
+          específicos para defenir a forma como sua redaçãoserá
+          corrigida, do tema mais simples, até os critérios do ENEM, o "EscritaExemplar" tem tudo oque você precisa para
+          corrijir aquela redação (ou aomenos deveria). </p>
       </div>
 
     </div>
@@ -349,74 +457,25 @@
     <div class="row featurette">
       <div class="col-md-7">
         <h2 class="featurette-heading">Mas porque fazer um site desses?
-          <p></p> 
-          <span class="text-muted">Praticidade, rapidez e versatilidade</span></h2>
           <p></p>
-        <p class="lead">Certamente o advindo das Inteligências Artificais está provocando grandes mudanças no cotidiano de todos,não a toa a ferramenta do ChatGPT vem se popularizando cada vez mais. Com isso em mentes pensamos em nos aproveitar dessa ferramenta para um 
-          ramo específico e bastante presente no mundo do estudo, visto que redações representam umaspecto bastante presente nesse âmbito. Para além disso, o "EscritaExemplar" serve também comoferramenta de auxílio tanto para discentes quanto para docentes.
+          <span class="text-muted">Praticidade, rapidez e versatilidade</span>
+        </h2>
+        <p></p>
+        <p class="lead">Certamente o advindo das Inteligências Artificais está provocando grandes mudanças no cotidiano
+          de todos,não a toa a ferramenta do ChatGPT vem se popularizando cada vez mais. Com isso em mentes pensamos em
+          nos aproveitar dessa ferramenta para um
+          ramo específico e bastante presente no mundo do estudo, visto que redações representam umaspecto bastante
+          presente nesse âmbito. Para além disso, o "EscritaExemplar" serve também comoferramenta de auxílio tanto para
+          discentes quanto para docentes.
         </p>
       </div>
-      <div class="col-md-5"  style="padding-botton: 10px ;">
+      <div class="col-md-5" style="padding-botton: 10px ;">
         <img class="img-fluid" src="{% static 'images/escrita.jpg' %}" alt="Generic placeholder image">
       </div>
     </div>
-    <!--
-    <hr class="featurette-divider">
-    
-    <nav class="Homenagens" style="background-color: gray;">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 mx-auto text-center">
-          
-            <img class="rounded-circle"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>João Pedro Holanda de Medeiros </h2>
-            <p>Aluno do 4º ano do curso técnico em informática do IFRN campus Pau dos Ferros</p>
-            <p>j.holanda@escolar.ifrn.edu.br</p>
-          </div>
-
-          <div class="col-lg-4 mx-auto text-center">
-            
-            <img class="rounded-circle" src="{% static 'images/book.jpeg' %}" alt="Generic placeholder image"
-              width="140" height="140">
-            <h2>João Victor da Silva Lira</h2>
-            <p>Aluno do 4º ano do curso técnico em informática do IFRN campus Pau dos Ferros</p>
-            <p>email</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 mx-auto text-center">
-           
-            <img class="rounded-circle"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>Jeferson Queiroga Pereira</h2>
-            <p>Orientador do projeto</p>
-            <p>jeferson.queiroga@ifrn.edu.br</p>
-          </div>
-
-          <div class="col-lg-4 mx-auto text-center">
-            
-            <img class="rounded-circle"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>Antônio Cleonildo da Silva Costa</h2>
-            <p>Coorientador do projeto</p>
-            <p>cleonildo.costa@ifrn.edu.br</p>
-          </div>
-
-        </div>
-
-      </div>
-    </nav>
-
-
-
-
--->
 
     <!-- FOOTER -->
+
     <footer>
       <nav>
         <p class="float-right"><a href="#">Voltar ao topo</a></p>
