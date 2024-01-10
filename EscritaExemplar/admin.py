@@ -7,5 +7,5 @@ class UsuarioAdmin(admin.ModelAdmin):
 
 @admin.register(Redacao)
 class RedacaoAdmin(admin.ModelAdmin):
-    list_display = ("titulo", "redacao", "modalidade", "data_publicacao")
+    list_display = ("titulo", "redacao", "data_publicacao")
 

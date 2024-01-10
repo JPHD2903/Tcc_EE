@@ -9,23 +9,9 @@
             </div>        
             <form method="post">
                 {% csrf_token %}
-                <div class="mb-3">
-                    {{ form.titulo }}
-                </div>
+                {{form.as_p}}
 
-                <div class="mb-3">
-                    {{ form.redacao }}
-                </div>
-                
-                <div class="mb-3">
-                    {{ form.modalidade }}
-                </div>
-
-                <div class="mb-3">
-                    {{ form.usuario }}
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="background-color:#CD750D;color: white ;"> Cadastrar </button>
+                <button type="submit" class="btn btn-primary" style="background-color:#CD750D;color: white ;"> Enviar </button>
             </form> 
         </div>
     </div>

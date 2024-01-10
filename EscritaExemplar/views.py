@@ -201,21 +201,49 @@ class PerfilDeleteView(LoginRequiredMixin, UsuarioDeleteView):
 #---------------------------Redação---------------------------#
 #-------------------------------------------------------------#
 
+
+
+# views.py
+# views.py
+
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Redacao
 from .form import RedacaoForm
-from .utils import enviar_redacao_para_correcao
 
-class RedacaoCreateView(generic.CreateView):
-  model = Redacao
-  form_class = Redacao
-  success_url = reverse_lazy('index')
-  template_name = "redacao/criar_redacao.html"
-  
-  def form_valid(self, form):  
-    messages.success(self.request, 'Cadastro realizado com sucesso!')
-    return super().form_valid(form)
-  
+class RedacaoCreateView(LoginRequiredMixin, View):
+    template_name = 'redacao/escrever.html'
+    form_class = RedacaoForm
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            redacao = form.save(commit=False)
+            redacao.autor = request.user
+            redacao.save()
+            return redirect('redacao-list')  # Redireciona para a página que lista as redações do usuário
+
+        return render(request, self.template_name, {'form': form})
+
+
+# Adicione uma nova view para listar as redações do usuário
+class RedacaoListView(LoginRequiredMixin, ListView):
+    model = Redacao
+    template_name = "redacao/redacoes.html"
+    context_object_name = 'redacoes'
+    items_per_page = 4
+
+    def get(self, request, *args, **kwargs):
+        redacoes = Redacao.objects.filter(autor=request.user)
+        return render(request, self.template_name, {'redacoes': redacoes})
+
+
+'''
 class RedacaoListView(ListView):
     model = Redacao
     template_name = "redacao/redacoes.html"
@@ -241,7 +269,7 @@ class RedacaoListView(ListView):
             'search_form': search_form,
         }
         return render(request, self.template_name, context)
-
+'''
 class RedacaoDetailView(generic.DetailView):
     model = Redacao
     template_name = 'redacao/detalhe.html'

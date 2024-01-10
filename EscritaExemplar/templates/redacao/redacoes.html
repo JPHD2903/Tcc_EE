@@ -1,8 +1,10 @@
+
+
 {% extends 'base.html' %}
 
 {% block center %}
 
-<h2> Usuários </h2>
+<h2> Redações </h2>
 <div>
 
   <div class="mensagem_card">
@@ -16,18 +18,11 @@
   </div>
 </div>
 
-<a href="{% url 'criar_usuario' %}" class="btn btn-success mb-3">Novo Cadastro</a>
-
-<form method="get" class="mb-3">
-  {{ search_form.as_p }}
-  <button type="submit" class="btn btn-primary">Pesquisar</button>
-</form>
-
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>Título</th>
-      <th>Data de Publicação</th>
+      <th>Data</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -36,10 +31,6 @@
       <tr>
         <td>{{ redacao.titulo }}</td>
         <td>{{ redacao.data_publicacao }}</td>
-        <td>
-          <a href="{% url 'redacao-detail' pk=redacao.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
-          
-        </td>
       </tr>
     {% endfor %}
 
@@ -49,20 +40,4 @@
 <!-- Modal de Confirmação de Exclusão -->
 
 
-
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      {% if usuarios.has_previous %}
-      <a class="page-link" href="?page={{ usuarios.previous_page_number }}">Anterior</a>
-      {% endif %}
-    </li>
-
-    <li class="page-item">
-      {% if usuarios.has_next %}
-      <a class="page-link" href="?page={{ usuarios.next_page_number }}">Próximo</a>
-      {% endif %}
-    </li>
-  </ul>
-</nav>
 {% endblock %}

@@ -1,9 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from EscritaExemplar.views import IndexView, UsuarioListView, UsuarioProfileView,UsuarioCreateView, UsuarioUpdateView, UsuarioDeleteView, UsuarioDetailView
-from EscritaExemplar.views import RedacaoListView, RedacaoDetailView , RedacaoCreateView, RedacaoDeleteView
+from EscritaExemplar.views import RedacaoDetailView , RedacaoDeleteView, RedacaoCreateView, RedacaoListView
 from EscritaExemplar.views import PerfilUpdateView , PerfilDeleteView, CustomRegisterView
-#from EscritaExemplar.views import InformarRedacaoView, RedacaoCorrigidaView
 
 from django.views import generic
 from allauth.account.views import LoginView, LogoutView
