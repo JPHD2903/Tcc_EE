@@ -1,24 +1,68 @@
 {% extends 'base2.html' %}
 
 {% block center %}
-    <div class="container">
-        <div class="col-lg-4 mx-auto text-center">
-            <div>
-                <h2 style="font-family: 'Libre Baskerville', serif; color: orange;"> EscritaExemplar </h2>
-                <p>Bem-vindo ao nosso sistema de cadastro! 
-                    Estamos felizes por você estar aqui. 
-                    Preencha os campos abaixo com as informações necessárias e junte-se à nossa comunidade.</p>
-            </div>        
-            <form method="post">
-                {% csrf_token %}
+<style>
+    .container {
+        display: flex;
+       /* Centraliza o conteúdo horizontalmente */
+      /* Centraliza o conteúdo verticalmente */
+        height: 100vh;
+    }
 
-                {{form.as_p}}
+    .col-lg-4 {
+        max-width: 300px;  /* Defina a largura máxima desejada */
+    }
 
-                <button type="submit" class="btn btn-primary" style="background-color:#CD750D;color: white ;"> Cadastrar </button>
-            </form> 
-            <p> Já é um usuário? Clique em <a href="{% url 'login'%}">Logar</a> </p>
-        </div>
-    </div>
-        
-{% endblock %}
+    .mb-3 label {
+        font-size: 20px;
+    }
+
+    .mb-3 .form-control {
+        width: 100%;  /* Utilize a largura total do contêiner pai */
+        font-size: 14px;
+    }
+
    
+</style>
+<div class="container" >
+    <div class="col-lg-4 mx-auto text-center">
+        <div>
+            <h2 style="font-family: 'Libre Baskerville', serif; color:  #CD750D; "> EscritaExemplar </h2>
+            <p style="font-family: 'Libre Baskerville', serif;">Bem-vindo ao nosso sistema de cadastro!
+                Estamos felizes por você estar aqui.
+                Preencha os campos abaixo com as informações necessárias e junte-se à nossa comunidade.</p>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label style="font-family: 'Libre Baskerville', serif;" for="{{ form.username.id_for_label }}" class="form-label">Nome de Usuário:</label>
+                {{ form.username }}
+            </div>
+
+            <div class="mb-3">
+                <label style="font-family: 'Libre Baskerville', serif; display: block;"for="{{ form.email.id_for_label }}" class="form-label">Email:</label>
+                {{ form.email }}
+            </div>
+
+            <div class="mb-3">
+                <label style="display: block;font-family: 'Libre Baskerville', serif;" for="{{ form.first_name.id_for_label }}" class="form-label">Primeiro Nome:</label>
+                {{ form.first_name }}
+            </div>
+
+            <div class="mb-3">
+                <label style="display: block; font-family: 'Libre Baskerville', serif;" for="{{ form.last_name.id_for_label }}" class="form-label">Sobrenome:</label>
+                {{ form.last_name }}
+            </div>
+
+            <div class="mb-3">
+                <label style="display: block; font-family: 'Libre Baskerville', serif;" for="{{ form.last_name.id_for_label }}" class="form-label">Senha:</label>
+                {{ form.last_name }}
+            </div>
+
+            <button style="font-family: 'Libre Baskerville', serif; background-color:  #CD750D; "type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+        <p style="font-size: 20px; font-family: 'Libre Baskerville', serif; padding: 30px;"> Já é um usuário? Clique em <a href="{% url 'login'%}">Logar</a> </p>
+    </div>
+</div>
+
+{% endblock %}

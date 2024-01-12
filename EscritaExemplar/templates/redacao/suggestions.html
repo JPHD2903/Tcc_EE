@@ -1,0 +1,47 @@
+<style>
+    /* Adicione isso ao seu arquivo de estilo (pode ser um arquivo separado ou no cabeçalho do seu HTML) */
+    /* Adicione isso ao seu arquivo de estilo (pode ser um arquivo separado ou no cabeçalho do seu HTML) */
+    #suggestions-container {
+        position: absolute;
+        z-index: 1000;
+        width: 100%;
+    }
+
+    .list-group {
+        margin-top: 5px;
+        /* Ajuste o espaçamento superior conforme necessário */
+        list-style: none;
+        /* Remove os marcadores de lista padrão */
+        padding: 0;
+        /* Remove o preenchimento padrão da lista */
+    }
+
+    .list-group-item {
+        cursor: pointer;
+    }
+
+    .list-group-item a {
+        display: block;
+        /* Cada título em uma nova linha */
+        text-decoration: none;
+        /* Remove sublinhado padrão dos links */
+        color: #333;
+        /* Cor do texto para garantir visibilidade */
+    }
+
+    .list-group-item:hover {
+        background-color: #e0e0e0;
+        /* Cor de fundo quando hover, ajuste conforme necessário */
+    }
+</style>
+
+<!-- suggestions.html -->
+<div id="suggestions-container" style="position: absolute; z-index: 1000; width: 100%;">
+    <ul class="list-group">
+        {% for redacao in redacoes %}
+        <li class="list-group-item">
+            <a href="{% url 'redacao-detail' pk=redacao.pk %}">{{ redacao.titulo }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

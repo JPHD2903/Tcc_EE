@@ -1,12 +1,10 @@
 from logging import PlaceHolder
 from django.forms import ModelForm
 from django import forms
-from .models import Usuario, Redacao
-
+from .models import Usuario, Redacao, Imagem, CustomUser
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from django.contrib.auth.forms import UserChangeForm as DjangoUserChangeForm
 
 
 
@@ -27,8 +25,6 @@ class UsuarioSearchForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Nome'}),
     )
-    
-
    
 class RedacaoForm(ModelForm):
 
@@ -49,19 +45,27 @@ class RedacaoSearchForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'Título'}),
     )
 
-from django.contrib.auth.models import User
-from django.contrib.auth import forms
-
 # Register your models here.
-class CustomUserCreationForm(forms.UserCreationForm):
-    class Meta(forms.UserCreationForm.Meta):
-        model = User
-        fields = forms.UserCreationForm.Meta.fields + ('email','first_name','last_name',)
-        
-    def __init__(self, *args, **kwargs): # Adiciona 
-        super().__init__(*args, **kwargs)  
-        for field_name, field in self.fields.items():   
-            field.widget.attrs['class'] = 'form-control'
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from .models import User, Imagem  # Certifique-se de importar seu modelo de imagem
+
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from .models import CustomUser, Imagem
+
+class CustomUserCreationForm(UserCreationForm):
+    profile_picture = forms.ModelChoiceField(
+        queryset=Imagem.objects.all(),
+        empty_label="Escolha uma imagem",
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
+
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = UserCreationForm.Meta.fields + ('email', 'first_name', 'last_name', 'profile_picture',)
+
 
 # forms.py
 from django import forms

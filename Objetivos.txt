@@ -83,7 +83,10 @@ django-extensions
 Prioridades 1.4
 Ajeitar página do admin
 Ajustar por menores das Funcionalidades báscias
-Imagem para usuário 
+Perfil 
+  Ajustar formato
+  Ajustar edição 
+  Colocar imagem
 Questões visuais
 
 

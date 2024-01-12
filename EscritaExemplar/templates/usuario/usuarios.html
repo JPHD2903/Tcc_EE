@@ -26,20 +26,20 @@
 <table class="table table-bordered">
   <thead>
     <tr>
+      <th>Nome de Usuário</th>
       <th>Nome</th>
-      <th>Nome de usuário</th>
       <th>Ações</th>
     </tr>
   </thead>
   <tbody>
-    {% for usuario in usuarios %}
+    {% for user in users %}
     <tr>
-      <td>{{ usuario.nome }}</td>
-      <td>{{ usuario.username }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.first_name }} {{user.last_name}}</td>
       <td>
-        <a href="{% url 'usuarios-detail' pk=usuario.pk %}" class="btn btn-primary btn-sm">Detalhar</a>
+        <a href="#" class="btn btn-primary btn-sm">Detalhar</a>
         {% if user.is_staff %}
-        <a href="{% url 'usuarios-update' pk=usuario.pk %}" class="btn btn-primary btn-sm">Editar</a>
+        <a href="#" class="btn btn-primary btn-sm">Editar</a>
         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
           data-target="#confirmDeleteModal{{ usuario.pk }}">
           Remover
@@ -59,7 +59,7 @@
                 Tem certeza de que deseja excluir o usuário {{ usuario.nome }}?
               </div>
               <div class="modal-footer">
-                <form method="post" action="{% url 'usuarios-delete' pk=usuario.pk %}">
+                <form method="post" action="#">
                   {% csrf_token %}
                   <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
                 </form>

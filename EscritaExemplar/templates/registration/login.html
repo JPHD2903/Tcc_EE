@@ -8,7 +8,7 @@
 <style>
     body {
         
-        background-image: url("{% static 'images/escrita.jpg' %}");
+        background-image: url("{% static 'images/Login.jpeg' %}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -28,8 +28,8 @@
     }
 
     .left-half {
-        /*background-color: rgba(255, 255, 255, 0.7);*/
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.7);
+       
         padding: 20px;
         box-sizing: border-box;
         height: 100%;  /* Faz com que a altura ocupe toda a tela */
@@ -61,12 +61,12 @@
 <div class="container">
     <div class="left-half">
         <div>
-            <h1 style="margin-top: 20px; padding: 40px; font-family: 'Libre Baskerville', serif; color: #CD750D; font-size: 50px;">
+            <h1 style="margin-bottom: 60px;  font-family: 'Libre Baskerville', serif; color: #CD750D; font-size: 50px;">
                 <i>EscritaExemplar</i><span
                 class="material-symbols-outlined icon-large">edit</span>
             </h1>
 
-            <h2 style="margin-top: 20px; padding: 40px; font-family: 'Libre Baskerville', serif; color: #CD750D; font-size: 50px;">Login</h2>
+            <h2 style="margin-bottom: 50px; font-family: 'Libre Baskerville', serif; color: #CD750D; font-size: 50px;">Login</h2>
 
             <form method="post">
                 {% csrf_token %}
@@ -88,6 +88,6 @@
             </form>
         </div>
     </div>
-</div>
+</div>      
 
 {% endblock %}

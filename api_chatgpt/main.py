@@ -13,7 +13,7 @@ def enviar_redacao_para_correcao(redacao):
 
     body_mensagem = {
         "model": id_modelo,
-        "messages": [{"role": "user", "content": f"corija a frase a seguir", "role": "system"}]
+        "messages": [{"role": "user", "content": f"corija a frase a seguir e coloque em tópicos os principais erros", "role": "system"}]
     }
     body_mensagem["messages"].append({"role": "user", "content": redacao})
     

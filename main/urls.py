@@ -2,13 +2,12 @@ from django.contrib import admin
 from django.urls import path, include
 from EscritaExemplar.views import IndexView, UsuarioListView, UsuarioProfileView,UsuarioCreateView, UsuarioUpdateView, UsuarioDeleteView, UsuarioDetailView
 from EscritaExemplar.views import RedacaoDetailView , RedacaoDeleteView, RedacaoCreateView, RedacaoListView
-from EscritaExemplar.views import UserProfileUpdateView , PerfilDeleteView, CustomRegisterView, RedacaoCorrecaoView
+from EscritaExemplar.views import SuggestionsView,UserListView, UserProfileUpdateView , PerfilDeleteView, CustomRegisterView, RedacaoCorrecaoView
 
 from django.views import generic
 from allauth.account.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
-
 
 
 
@@ -39,6 +38,8 @@ urlpatterns = [
     path('redacao/detalhe/<int:pk>/', RedacaoDetailView.as_view(), name='redacao-detail'),
 
     path('redacao/correcao/<int:pk>/', RedacaoCorrecaoView.as_view(), name='redacao-correcao'),
+    path('usuarios/listar/', UserListView.as_view(), name='user_list'),
+    path('suggestions/', SuggestionsView.as_view(), name='suggestions'),
     #path('escrever/', InformarRedacaoView.as_view(), name='criar_redacao'),
     #path('redacao/redacao_corrigida', RedacaoCorrigidaView.as_view(), name='redacao_corrigida'),
    

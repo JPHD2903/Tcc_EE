@@ -76,7 +76,7 @@ class UsuarioProfileView(LoginRequiredMixin, TemplateView):
         context['usuario_logado'] = self.request.user
         return context
 
-
+ListView
 #---------------------------------------------------------#
 # views.py
 from django.shortcuts import render, redirect
@@ -97,7 +97,7 @@ class CustomRegisterView(View):
 
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_valid = False
+            user.is_active = False  # Alterado para is_active
             user.save()
             messages.success(request, 'Registrado. Agora faça o login para começar!')
             return redirect('index')  # Substitua 'index' pelo nome correto da sua página inicial
@@ -106,6 +106,7 @@ class CustomRegisterView(View):
             print('Invalid registration details')
 
         return render(request, self.template_name, {"form": form})
+
 
 
 # views.py
@@ -161,6 +162,16 @@ class UsuarioDeleteView(generic.DeleteView):
         # Redirecionar para a mesma página
         return HttpResponse(reverse_lazy("usuarios-list"))
     
+from django.contrib.auth.models import User
+from django.views.generic import ListView
+from django.shortcuts import render
+
+class UserListView(ListView):
+    model = User
+    template_name = 'usuario/usuarios.html'  # Substitua com o nome do seu template
+    context_object_name = 'users'
+
+# Adicione esta view às suas URLs
 
 
 #---------------------------------------------------------#
@@ -220,7 +231,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .form import RedacaoForm  # Importe o formulário associado ao modelo Redacao
 import requests
 import json
-from .utils import enviar_redacao_para_correcao
+from .utils import enviar_redacao_para_correcao, identificar_erros_redacao
 
 class RedacaoCreateView(LoginRequiredMixin, View):
     template_name = 'redacao/escrever.html'
@@ -248,8 +259,40 @@ class RedacaoCreateView(LoginRequiredMixin, View):
             # Pode ajustar a renderização conforme necessário
 
         return render(request, self.template_name, {'form': form})
+    
+    def post2(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            redacao = form.save(commit=False)
+            redacao.autor = request.user
+            redacao.save()
+
+            # Envia a redação para correção
+            erros_redacao = identificar_erros_redacao(redacao.redacao)
+
+            # Salva a redação corrigida no objeto Redacao
+            redacao.erros_redacao = erros_redacao
+            redacao.save()
+
+            return render(request, 'redacao/redacao_corrigida.html', {'redacao': redacao})
+            # Pode ajustar a renderização conforme necessário
+
+        return render(request, self.template_name, {'form': form})
+
+    
 
 
+from django.db.models import Q
+# views.py
+from django.shortcuts import render
+from django.views import View
+from .models import Redacao
+
+class SuggestionsView(View):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q')
+        redacoes = Redacao.objects.filter(autor=request.user, titulo__icontains=query)
+        return render(request, 'redacao/suggestions.html', {'redacoes': redacoes})
 
 # Adicione uma nova view para listar as redações do usuário
 class RedacaoListView(LoginRequiredMixin, ListView):
@@ -258,9 +301,23 @@ class RedacaoListView(LoginRequiredMixin, ListView):
     context_object_name = 'redacoes'
     items_per_page = 4
 
+    def get_queryset(self):
+        # Obtém o termo de busca do parâmetro 'q' na URL
+        query = self.request.GET.get('q')
+
+        # Filtra as redações do usuário atual
+        redacoes = Redacao.objects.filter(autor=self.request.user)
+
+        # Se houver um termo de busca, filtra também pelo título
+        if query:
+            redacoes = redacoes.filter(Q(titulo__icontains=query))
+
+        return redacoes
+
     def get(self, request, *args, **kwargs):
-        redacoes = Redacao.objects.filter(autor=request.user)
+        redacoes = self.get_queryset()
         return render(request, self.template_name, {'redacoes': redacoes})
+
 
 
 
