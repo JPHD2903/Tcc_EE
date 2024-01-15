@@ -87,7 +87,12 @@ from django.contrib import messages
 class CustomRegisterView(View):
     template_name = "registration/register.html"
     form_class = CustomUserCreationForm
+    success_url = reverse_lazy('index')
 
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return super().form_valid(form)
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {"form": form})
@@ -97,7 +102,7 @@ class CustomRegisterView(View):
 
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False  # Alterado para is_active
+            user.is_valid = False
             user.save()
             messages.success(request, 'Registrado. Agora faça o login para começar!')
             return redirect('index')  # Substitua 'index' pelo nome correto da sua página inicial

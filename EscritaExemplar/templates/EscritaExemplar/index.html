@@ -65,7 +65,7 @@
       font-size: 15px;
     }
 
-   
+
 
     .nav-item {
       border-right: 1px solid white;
@@ -152,10 +152,10 @@
 
     }
 
-    .nav-item .nav-link{
+    .nav-item .nav-link {
       border: 0px solid white;
       padding-right: 10px;
-      font-family: 'Libre Baskerville', serif; 
+      font-family: 'Libre Baskerville', serif;
       font-size: 25px;
     }
 
@@ -362,62 +362,67 @@
   <header>
     <nav class="navbar navbar-expand-md fixed-top" style="background-color: #CD750D;">
       <a class="navbar-brand" href="{% url 'index' %}"
-        style="font-family: 'Libre Baskerville', serif; color: white; font-size: 25px; background-color:#CD750D ;">EscritaExemplar</a>
+        style="font-family: 'Libre Baskerville', serif; color: white; font-size: 25px;">EscritaExemplar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}">Início <span class="sr-only">(atual)</span></a>
-        </li>
-        {% if user.is_staff %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'user_list' %}">Lista de usuários</a>
-        </li>
-        {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'redacao-list' %}">Histórico</a>
-        </li>
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="{% url 'logout'%}">Sair</a>
-        </li>
-      </ul>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Início <span class="sr-only">(atual)</span></a>
+          </li>
+          {% if user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'usuarios-list' %}">Lista de usuários</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'redacao-list' %}">Histórico</a>
+          </li>
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="{% url 'logout'%}">Sair</a>
+          </li>
+        </ul>
 
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Buscar redação" aria-label="Buscar redação"
-          style="border-radius: 5px;">
-        <a href="{% url 'criar_redacao' %}" class="btn btn-outline-success"
-          style="color: white; border-color: aliceblue;">
-          <span class="material-symbols-outlined">edit</span> ESCREVER
-        </a>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" name="q" id="search-input" placeholder="Buscar redação"
+            aria-label="Buscar redação" style="border-radius: 5px;">
 
-        <div class="collapse navbar-collapse" id="navbarCollapse" style="padding-left: 5px; display: flex;">
-          <div class="action">
-            <div class="profile" onclick="menuToggle();">
-              <img src="static/images/escrita.jpg" alt="escrita">
-            </div>
-            <div class="menu">
-              <h3>
-                {{user.username}} <br>
-              </h3>
-              <ul>
-                <li> <a href="{% url 'usuarios-profile' %}"><span class="material-symbols-outlined">
-                      person</span>Perfil</li></a>
-                <li> <a href="{% url 'redacao-list' %}"><span class="material-symbols-outlined">
-                      history_edu</span> Histórico</li></a>
-                {% if user.is_staff %}
-                <li> <a href="{% url 'usuarios-list' %}"><span class="material-symbols-outlined">
-                      receipt_long</span> Lista de usuários</li></a>
-                {% endif %}
-                <li> <a href="{% url 'logout'%}"><span class="material-symbols-outlined">
-                      logout</span> Sair</li></a>
-              </ul>
-            </div>
+          <!-- Tabela de sugestões -->
+          <div id="suggestions-container">
+            <ul class="list-group" style="position: absolute; z-index: 1000; width: 100%;">
+              <!-- As sugestões serão exibidas aqui -->
+            </ul>
+          </div>
+
+          <button class="btn btn-outline-success" type="submit" style="color: white; border-color: aliceblue;">
+            <span class="material-symbols-outlined">edit</span>
+            <a href="{% url 'criar_redacao' %}" style="color: white; text-decoration: none;">ESCREVER</a>
+          </button>
+
+        </form>
+
+        <div class="action ml-2">
+          <div class="profile" onclick="menuToggle();">
+            <img src="{% static 'images/book.jpeg' %}" alt="escrita">
+          </div>
+          <div class="menu">
+            <h3>{{user.username}}</h3>
+            <ul>
+              <li><a href="{% url 'usuarios-profile' %}"><span class="material-symbols-outlined">person</span>Perfil</a>
+              </li>
+              <li><a href=""><span class="material-symbols-outlined">history_edu</span>Histórico</a></li>
+              {% if user.is_staff %}
+              <li><a href="{% url 'usuarios-list' %}"><span class="material-symbols-outlined">receipt_long</span>Lista
+                  de usuários</a></li>
+              {% endif %}
+              <li><a href="{% url 'logout'%}"><span class="material-symbols-outlined">logout</span>Sair</a></li>
+            </ul>
           </div>
         </div>
-      </form>
+      </div>
     </nav>
   </header>
 
@@ -560,6 +565,52 @@
     function menuToggle() {
       const toggleMenu = document.querySelector('.menu');
       toggleMenu.classList.toggle('active')
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- Adicione isso no final do seu template ou em um arquivo JavaScript separado -->
+  <script>
+    $(document).ready(function () {
+      // Adiciona um ouvinte de evento ao campo de busca para iniciar a pesquisa ao clicar
+      $('#search-input').on('click', function (event) {
+        event.stopPropagation(); // Impede que o clique no campo de busca feche o menu
+      });
+
+      // Adiciona um ouvinte de evento ao documento para fechar as sugestões quando clicar em qualquer lugar fora do campo de busca
+      $(document).on('click', function (event) {
+        if (!$(event.target).closest('#search-input').length) {
+          $('#suggestions-container').hide();
+        }
+      });
+
+      // Função para lidar com a entrada do usuário
+      $('#search-input').on('input', function () {
+        var query = $(this).val();
+
+        // Verifica se o campo de busca não está vazio antes de enviar a solicitação AJAX
+        if (query.trim() !== '') {
+          // Envia uma solicitação AJAX para obter sugestões
+          $.ajax({
+            url: '/suggestions/',  // Substitua pelo URL correto da sua view de sugestões
+            data: { 'q': query },
+            method: 'GET',
+            success: function (data) {
+              // Atualiza a lista de sugestões com os dados recebidos
+              $('#suggestions-container ul').html(data);
+              $('#suggestions-container').show();
+            }
+          });
+        } else {
+          $('#suggestions-container').hide(); // Esconde as sugestões se o campo estiver vazio
+        }
+      });
+    });
+
+    // Adiciona uma função para parar a propagação do clique no menu
+    function menuToggle() {
+      event.stopPropagation();
+      $('.menu').toggleClass('active');
     }
   </script>
 

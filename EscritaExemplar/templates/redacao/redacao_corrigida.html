@@ -6,9 +6,12 @@
             <div>
                 <h1>Redação Corrigida</h1>
             </div>        
+            <div>
+                <a href="{% url 'redacao-list' %}" class="btn btn-secondary" style="color: white;background-color: #CD750D; font-family: 'Libre Baskerville', serif;">Voltar</a>
+            </div>
             <p>{{ redacao.redacao_corrigida }}</p>
             <div>
-                <p>  {{ redacao.erros_redacao }} </p>
+                <p>{{ redacao.erros_redacao }}</p>
                
             </div>
         </div>
