@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+
+{% block center %} 
+  <h2> DETALHE REDAÇÃO </h2>
+
+  <a href="{% url 'redacao-list' %}" class="btn btn-success mb-3">Voltar</a>
+
+  <table class="table table-bordered"> 
+    <thead>
+      <tr>
+        <th>Redação</th>
+        <th>Redação corrigida</th>
+        <th>Principais Erros</th>
+      </tr>
+    </thead>
+    <tbody>
+        <td>{{ redacao.redacao }}</td>
+        <td>{{ redacao.redacao_corrigida }}</td>
+        <td>{{ redacao.erros_redacao}}</td>
+    </tbody>
+
+    
+  </table>
+{% endblock %}

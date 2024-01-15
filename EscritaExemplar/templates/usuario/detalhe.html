@@ -3,7 +3,7 @@
 {% block center %} 
   <h2> DETALHE USUÁRIO </h2>
 
-  <a href="{% url 'index' %}" class="btn btn-success mb-3">Voltar</a>
+  <a href="{% url 'usuarios-list' %}" class="btn btn-success mb-3">Voltar</a>
 
   <table class="table table-bordered"> 
     <thead>
@@ -14,10 +14,12 @@
       </tr>
     </thead>
     <tbody>
-        <td>{{ reserva.nome }}</td>
-        <td>{{ reserva.nickname }}</td>
-        <td>{{ reserva.email }}</td>
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.username }}</td>
+        <td>{{ usuario.email }}</td>
       </tr>
     </tbody>
+
+    
   </table>
 {% endblock %}

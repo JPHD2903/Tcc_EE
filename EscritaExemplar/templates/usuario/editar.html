@@ -11,26 +11,11 @@
                         Atualize os campos abaixo com as informações necessárias.</p>
                 </div>
                 
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="mb-3">
-                        {{ form.nome }}
-                    </div>
-
-                    <div class="mb-3">
-                        {{ form.nickname }}
-                    </div>
-                    
-                    <div class="mb-3">
-                        {{ form.email }}
-                    </div>
-
-                    <div class="mb-3">
-                        {{ form.senha }}
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="background-color:#CD750D;color: white ;"> Atualizar </button>
-                </form> 
+                    {{ form.as_p }}
+                    <button type="submit">Salvar Alterações</button>
+                </form>
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!doctype html>
 <html lang="en">
 
@@ -49,9 +50,309 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
   <style>
+    /* Estilos comuns para o site */
+    header a,
+    .nav-link {
+      text-decoration: none;
+      color: white;
+    }
+
+    .nav-link {
+      display: inline-block;
+      transition: 0.5s;
+      font-weight: 500;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
+    }
+
+
+
+    .nav-item {
+      border-right: 1px solid white;
+      border-left: 1px solid white;
+      padding-right: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
+    }
+
+    .action {
+      top: 20px;
+      right: 30px;
+    }
+
+    .action .profile {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .action .profile img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .action .menu {
+      position: absolute;
+      top: 120px;
+      right: -10px;
+      padding: 10px 20px;
+      background: #fff;
+      width: 200px;
+      box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      transition: 0.5s;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    /* Outros estilos específicos para o menu */
+    /* ... */
+
+    /* Estilos para o footer */
+    footer {
+      background-color: orange;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer a {
+      color: #007bff;
+    }
+
     header a {
       text-decoration: none;
       color: white;
+    }
+
+    .nav-link {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      transition: 0.5s;
+      font-weight: 500;
+      transition: 0.5s;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
+
+    }
+
+    .nav-link a {
+      border-radius: 5px;
+      font-size: 5px;
+
+    }
+
+    .nav-item .nav-link {
+      border: 0px solid white;
+      padding-right: 10px;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 25px;
+    }
+
+    .action {
+
+      top: 20px;
+      right: 30px;
+    }
+
+    .action .profile {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .action .profile img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .action .menu {
+      position: absolute;
+      top: 120px;
+      right: -10px;
+      padding: 10px 20px;
+      background: #fff;
+      width: 200px;
+      box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      transition: 0.5s;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .action .menu.active {
+      top: 80px;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .action .menu::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      right: 28px;
+      width: 20px;
+      height: 20px;
+      background-color: #fff;
+      transform: rotate(45deg);
+    }
+
+    .action .menu h3 {
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      padding: 20px 0;
+      font-weight: 500;
+      font-size: 18px;
+      color: #555;
+      line-height: 1.2em;
+    }
+
+    .action .menu h3 span {
+      font-size: 14px;
+      color: #cecece;
+      font-weight: 400;
+
+    }
+
+    .action .menu ul li {
+      list-style: none;
+      padding: 10px 0px;
+      border-top: 1px solid rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+    }
+
+    .action .menu ul li {
+      max-width: 20px;
+    }
+
+    .action .menu ul li span {
+      max-width: 20px;
+      margin-right: 10px;
+      opacity: 0.5;
+      transition: 0.5s;
+    }
+
+    .action .menu ul li:hover span {
+      opacity: 1;
+    }
+
+    .action .menu ul li a {
+      display: inline-block;
+      text-decoration: none;
+      color: #555;
+      transition: 0.5s;
+      font-weight: 500;
+      transition: 0.5s;
+    }
+
+    .action .menu ul li:hover a {
+      color: #CD750D;
+    }
+
+    footer {
+      background-color: gray;
+      padding: 10px;
+      color: white;
+      text-align: center;
+
+      bottom: 0;
+      width: 100%;
+    }
+
+    .carousel-item .img-fluid {
+      height: 37em;
+      width: 100em;
+    }
+  </style>
+  <style>
+    footer {
+      background-color: #CD750D;
+      /* Cor de fundo do footer */
+      padding: 20px;
+      /* Espaçamento interno do footer */
+      color: white;
+      /* Cor do texto do footer */
+      /* Mantém o footer fixo na parte inferior da página */
+      bottom: 0;
+      /* Alinha o footer ao fundo da página */
+      width: 100%;
+      /* Largura total */
+    }
+
+    /* Adiciona estilos ao link "Voltar ao topo" */
+    footer a {
+      color: #007bff;
+      /* Cor do link */
+    }
+
+    .featurette {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .featurette img {
+      border-radius: 10px;
+      /* ou qualquer valor desejado para o arredondamento das bordas */
+    }
+
+    /* Adicione estas regras de estilo para garantir que a imagem ocupe 100% da altura da div .col-md-5 */
+    .featurette .col-md-5 {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .featurette .col-md-5 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Para manter a proporção da imagem e cobrir completamente a altura da div */
+    }
+
+    /* Adicione este bloco de estilo ao seu arquivo CSS ou no bloco <style> do seu HTML */
+    .icons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      /* Ajusta o espaçamento entre as linhas de imagens */
+    }
+
+    .icons-row {
+      display: flex;
+      gap: 10px;
+      /* Ajusta o espaçamento entre as imagens na mesma linha */
+    }
+
+    .icons img {
+      width: 60px;
+      /* Ajuste a largura conforme necessário */
+      height: 600px;
+      /* Ajuste a altura conforme necessário */
+      object-fit: cover;
+      /* Mantém proporções da imagem */
+      border-radius: 54%;
+
+      padding: 15px;
+      /* Torna a imagem circular */
     }
   </style>
 </head>
@@ -66,200 +367,252 @@
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="btn-group">
-          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            Action
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{% url 'usuarios-list' %}" style="background-color: white;">Lista de usuários</a>
-            <a class="dropdown-item" href="{% url 'usuarios-profile' %}" style="background-color: white;">Perfil</a>
-            <a class="dropdown-item" href="#" style="background-color: white;">Histórico</a>
-            <div class="dropdown-divider"></div>
-            <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
-          </div>
-        </div>
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Início <span class="sr-only">(atual)</span></a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Histórico</a>
+            <a class="nav-link" href="{% url 'index' %}">Início <span class="sr-only">(atual)</span></a>
+          </li>
+          {% if user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'usuarios-list' %}">Lista de usuários</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'redacao-list' %}">Histórico</a>
           </li>
           <li class="nav-item text-nowrap">
-            <a class="nav-link" href="{% url 'account_logout'%}">Sair</a>
+            <a class="nav-link" href="{% url 'logout'%}">Sair</a>
           </li>
         </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Buscar redação" aria-label="Buscar redação"
-            style="border-radius: 5px;">
-          <button class="btn btn-outline-success" type="submit" style="color: white; border-color: aliceblue;"> <span
-              class="material-symbols-outlined">edit</span>ESCREVER</button>
+
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" name="q" id="search-input" placeholder="Buscar redação"
+            aria-label="Buscar redação" style="border-radius: 5px;">
+
+          <!-- Tabela de sugestões -->
+          <div id="suggestions-container">
+            <ul class="list-group" style="position: absolute; z-index: 1000; width: 100%;">
+              <!-- As sugestões serão exibidas aqui -->
+            </ul>
+          </div>
+
+          <button class="btn btn-outline-success" type="submit" style="color: white; border-color: aliceblue;">
+            <span class="material-symbols-outlined">edit</span>
+            <a href="{% url 'criar_redacao' %}" style="color: white; text-decoration: none;">ESCREVER</a>
+          </button>
+
         </form>
-        <!--Profile dropdown-->
+
+        <div class="action ml-2">
+          <div class="profile" onclick="menuToggle();">
+            <img src="{% static 'images/book.jpeg' %}" alt="escrita">
+          </div>
+          <div class="menu">
+            <h3>{{user.username}}</h3>
+            <ul>
+              <li><a href="{% url 'usuarios-profile' %}"><span class="material-symbols-outlined">person</span>Perfil</a>
+              </li>
+              <li><a href=""><span class="material-symbols-outlined">history_edu</span>Histórico</a></li>
+              {% if user.is_staff %}
+              <li><a href="{% url 'usuarios-list' %}"><span class="material-symbols-outlined">receipt_long</span>Lista
+                  de usuários</a></li>
+              {% endif %}
+              <li><a href="{% url 'logout'%}"><span class="material-symbols-outlined">logout</span>Sair</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </nav>
   </header>
 
+
   <main role="main">
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active" style="background-color: blue;">
-          <img class="img-fluid" src="{% static 'images/book.jpeg' %}" alt="...">
-        </div>
-
-        <div class="carousel-item" style="background-color: red;">
-          <img class="img-fluid" src="{% static 'images/book.jpeg' %}" alt="...">
+        <div class="carousel-item active">
+          <img class="img-fluid " src="{% static 'images/book.jpeg' %}" alt="Imagem do Livro">
         </div>
 
         <div class="carousel-item">
-          <img class="img-fluid" src="{% static 'images/book.jpeg' %}" alt="...">
+          <img class="img-fluid " src="{% static 'images/GPT.jpg' %}" alt="Imagem GPT">
+        </div>
+
+        <div class="carousel-item">
+          <img class="img-fluid " src="{% static 'images/Login.jpeg' %}" alt="Imagem de Login">
         </div>
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">Anterior</span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
         data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="visually-hidden">Próximo</span>
       </button>
     </div>
+
+
+
+    <div class="container marketing">
+
+      <!-- COMEÇAM AS MENCIONADAS FEATUREZINHAS xD -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette" style="display: flex;">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Seja bem vindo ao EscritaExemplar!
+            <p> </p>
+            <p><span class="text-muted">O incrível (e em desenvolvimento) Trabalho de Conclusão de Curso dos discentes
+                do Instituto Federal de Ciências e Tecnologias do campus Pau dos ferros,
+                João Pedro Holanda de Medeiros e João Victor da Silva Lira
+              </span>
+          </h2>
+          <p> </p>
+          <p class="lead"> Certamente se você chegou aqui e deve está pensando, que "que tipo de site é esse? Como ele
+            funciona?
+            Oque se pode fazer nele?" Fique atento que respondemos a seguir </p>
+        </div>
+        <div class="col-md-5">
+          <div class="icons">
+            <img src="static/images/escrita.jpg" alt="escrita" class="rounded-circle">
+            <img src="static/images/escrita.jpg" alt="escrita" class="rounded-circle">
+          </div>
+          <div class="icons">
+            <img src="static/images/escrita.jpg" alt="escrita" class="rounded-circle">
+            <img src="static/images/escrita.jpg" alt="escrita" class="rounded-circle">
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette" style="display: flex;">
+        <div class="col-md-5">
+          <img class="img-fluid" src="{% static 'images/GPT.jpg' %}" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Oque é o "EscritaExemplar?"
+            <p> <span class="text-muted">Para além de um TCC, uma ferramenta utilitária</span>
+          </h2>
+          </p>
+
+          <p class="lead"> A proposta do "EscritaExemplar" é ser uma ferramenta rápida e prática para correção de
+            redações, tudo isso
+            sendo feita de maneira automática através de uma API (Interface de Programação de Aplicação) do ChatGPT.
+            Isso
+            possibilita
+            uma maior dinamicidade na hora de corrijir redações, visto que você equanto usuário pode definir prompts
+            específicos para defenir a forma como sua redaçãoserá
+            corrigida, do tema mais simples, até os critérios do ENEM, o "EscritaExemplar" tem tudo oque você precisa
+            para
+            corrijir aquela redação (ou aomenos deveria). </p>
+        </div>
+
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Mas porque fazer um site desses?
+            <p></p>
+            <span class="text-muted">Praticidade, rapidez e versatilidade</span>
+          </h2>
+          <p></p>
+          <p class="lead">Certamente o advindo das Inteligências Artificais está provocando grandes mudanças no
+            cotidiano
+            de todos,não a toa a ferramenta do ChatGPT vem se popularizando cada vez mais. Com isso em mentes pensamos
+            em
+            nos aproveitar dessa ferramenta para um
+            ramo específico e bastante presente no mundo do estudo, visto que redações representam umaspecto bastante
+            presente nesse âmbito. Para além disso, o "EscritaExemplar" serve também comoferramenta de auxílio tanto
+            para
+            discentes quanto para docentes.
+          </p>
+        </div>
+        <div class="col-md-5" style="margin-botton: 10px ;">
+          <img class="img-fluid" src="{% static 'images/escrita.jpg' %}" alt="Generic placeholder image">
+        </div>
+      </div>
   </main>
 
-
-
-  <!-- Mensagens de marketing e outras featurezinhas
-      ================================================== -->
-  <!-- Envolve o resto da página em outro container, para centralizar todo o conteúdo. -->
-
-
-  <div class="container marketing">
-
-    <!-- COMEÇAM AS MENCIONADAS FEATUREZINHAS xD -->
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette" style="display: flex;">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">Primeiro título de featurezinhas. <span class="text-muted">Supreendente,
-            não?!</span></h2>
-        <p class="lead">Testes ícone </p>
-      </div>
-      <div class="col-md-5">
-        <img class="img-fluid" src="{% static 'images/GPT.jpg' %}" alt="Generic placeholder image">
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette" style="display: flex;">
-      <div class="col-md-5">
-        <img class="img-fluid" src="{% static 'images/GPT.jpg' %}" alt="Generic placeholder image">
-      </div>
-      <div class="col-md-7">
-        <h2 class="featurette-heading">Primeiro título de featurezinhas. <span class="text-muted">Supreendente,
-            não?!</span></h2>
-        <p class="lead">Testes ícone </p>
-      </div>
-
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">E, por último, essa aqui. <span class="text-muted">Xeque-mate!</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
-          semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
-          commodo.</p>
-      </div>
-      <div class="col-md-5">
-        <img class="img-fluid" src="{% static 'images/GPT.jpg' %}" alt="Generic placeholder image">
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-    <!-- Três colunas de texto, abaixo do carousel -->
-    <nav class="Homenagens" style="background-color: gray;">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 mx-auto text-center">
-            <!-- Adicionado "mx-auto" para centralizar horizontalmente -->
-            <img class="rounded-circle"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>João Pedro Holanda de Medeiros </h2>
-            <p>Aluno do 4º ano do curso técnico em informática do IFRN campus Pau dos Ferros</p>
-            <p>j.holanda@escolar.ifrn.edu.br</p>
-          </div><!-- /.col-lg-4 -->
-
-          <div class="col-lg-4 mx-auto text-center">
-            <!-- Adicionado "mx-auto" para centralizar horizontalmente -->
-            <img class="rounded-circle" src="{% static 'images/book.jpeg' %}" alt="Generic placeholder image"
-              width="140" height="140">
-            <h2>João Victor da Silva Lira</h2>
-            <p>Aluno do 4º ano do curso técnico em informática do IFRN campus Pau dos Ferros</p>
-            <p>email</p>
-          </div><!-- /.col-lg-4 -->
-        </div>
-        <div class="row">
-          <div class="col-lg-4 mx-auto text-center">
-            <!-- Adicionado "mx-auto" para centralizar horizontalmente -->
-            <img class="rounded-circle"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>Jeferson Queiroga Pereira</h2>
-            <p>Orientador do projeto</p>
-            <p>jeferson.queiroga@ifrn.edu.br</p>
-          </div><!-- /.col-lg-4 -->
-
-          <div class="col-lg-4 mx-auto text-center">
-            <!-- Adicionado "mx-auto" para centralizar horizontalmente -->
-            <img class="rounded-circle"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-              alt="Generic placeholder image" width="140" height="140">
-              <h2>Antônio Cleonildo da Silva Costa</h2>
-              <p>Coorientador do projeto</p>
-              <p>cleonildo.costa@ifrn.edu.br</p>
-          </div><!-- /.col-lg-4 -->
-
-        </div><!-- /.row -->
-      </div><!-- /.container -->
+  <footer>
+    <nav>
+      <p class="float-right"><a href="#">Voltar ao topo</a></p>
+      <p>&copy; Companhia S.A., 2017-2018 &middot; <a href="#">Privacidade</a> &middot; <a href="#">Termos</a></p>
     </nav>
+  </footer>
+  </main>
 
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+  <script src="../../assets/js/vendor/popper.min.js"></script>
+  <script src="../../dist/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script>
+    function menuToggle() {
+      const toggleMenu = document.querySelector('.menu');
+      toggleMenu.classList.toggle('active')
+    }
+  </script>
 
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- Adicione isso no final do seu template ou em um arquivo JavaScript separado -->
+  <script>
+    $(document).ready(function () {
+      // Adiciona um ouvinte de evento ao campo de busca para iniciar a pesquisa ao clicar
+      $('#search-input').on('click', function (event) {
+        event.stopPropagation(); // Impede que o clique no campo de busca feche o menu
+      });
 
+      // Adiciona um ouvinte de evento ao documento para fechar as sugestões quando clicar em qualquer lugar fora do campo de busca
+      $(document).on('click', function (event) {
+        if (!$(event.target).closest('#search-input').length) {
+          $('#suggestions-container').hide();
+        }
+      });
 
+      // Função para lidar com a entrada do usuário
+      $('#search-input').on('input', function () {
+        var query = $(this).val();
 
+        // Verifica se o campo de busca não está vazio antes de enviar a solicitação AJAX
+        if (query.trim() !== '') {
+          // Envia uma solicitação AJAX para obter sugestões
+          $.ajax({
+            url: '/suggestions/',  // Substitua pelo URL correto da sua view de sugestões
+            data: { 'q': query },
+            method: 'GET',
+            success: function (data) {
+              // Atualiza a lista de sugestões com os dados recebidos
+              $('#suggestions-container ul').html(data);
+              $('#suggestions-container').show();
+            }
+          });
+        } else {
+          $('#suggestions-container').hide(); // Esconde as sugestões se o campo estiver vazio
+        }
+      });
+    });
 
-    <!-- FOOTER -->
-    <footer class="container" style="background-color:gray ;">
-      <nav>
-        <p class="float-right"><a href="#">Voltar ao topo</a></p>
-        <p>&copy; Companhia S.A., 2017-2018 &middot; <a href="#">Privacidade</a> &middot; <a href="#">Termos</a></p>
-      </nav>
-    </footer>
-    </main>
-
-    <!-- Principal JavaScript do Bootstrap
-    ================================================== -->
-    <!-- Foi colocado no final para a página carregar mais rápido -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"></script>
+    // Adiciona uma função para parar a propagação do clique no menu
+    function menuToggle() {
+      event.stopPropagation();
+      $('.menu').toggleClass('active');
+    }
+  </script>
 
 
 </body>

@@ -1,0 +1,93 @@
+{% extends "base_login.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block content %}
+
+<style>
+    body {
+        
+        background-image: url("{% static 'images/Login.jpeg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        height: 100vh;
+        display: flex;
+        align-items: center;  /* Centraliza verticalmente o conteúdo na tela */
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .left-half {
+        background-color: rgba(255, 255, 255, 0.7);
+       
+        padding: 20px;
+        box-sizing: border-box;
+        height: 100%;  /* Faz com que a altura ocupe toda a tela */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;  /* Centraliza verticalmente o conteúdo dentro de .left-half */
+    }
+
+    .mb-3 label {
+        font-size: 20px;
+    }
+
+    .mb-3 .form-control {
+        width: 70%;
+        font-size: 14px;
+    }
+
+    span .icon-large {
+        font-size: 50px; 
+        width: 50px;
+    }
+
+    
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<div class="container">
+    <div class="left-half">
+        <div>
+            <h1 style="margin-bottom: 60px;  font-family: 'Libre Baskerville', serif; color: #CD750D; font-size: 50px;">
+                <i>EscritaExemplar</i><span
+                class="material-symbols-outlined icon-large">edit</span>
+            </h1>
+
+            <h2 style="margin-bottom: 50px; font-family: 'Libre Baskerville', serif; color: #CD750D; font-size: 50px;">Login</h2>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label" for="id_username" style="font-family: 'Libre Baskerville', serif;">Usuário:</label>
+                    <input type="text" name="username" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="id_password" style="font-family: 'Libre Baskerville', serif;">Senha:</label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+
+                <button class="btn btn-warning" type="submit" style="color: white;background-color: #CD750D; font-family: 'Libre Baskerville', serif; ">Entrar</button>
+                <p style="margin-top: 20px; font-family: 'Libre Baskerville', serif;">Não possui uma conta? Clique em
+                    <a href="{% url 'register' %}" style="text-decoration: none; font-family: 'Libre Baskerville', serif;">Cadastrar</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>      
+
+{% endblock %}

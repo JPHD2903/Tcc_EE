@@ -46,9 +46,6 @@ package-lock.json
 .env.production.local
 
 # Arquivos de imagem
-*.png
-*.jpg
-*.jpeg
 *.gif
 *.ico
 

@@ -16,13 +16,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'EscritaExemplar',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'EscritaExemplar',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',    
@@ -53,11 +53,12 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SITE_ID = 1
-
+''''
 MESSAGE_TAGS = {
     messages.SUCCESS: 'success',
     messages.ERROR: 'danger',
 }
+'''
 ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
@@ -83,6 +84,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+LANGUAGE_CODE = 'pt-br'
+
 ACCOUNT_FORMS = {
     'add_email': 'allauth.account.forms.AddEmailForm',
     'change_password': 'allauth.account.forms.ChangePasswordForm',
@@ -94,11 +97,11 @@ ACCOUNT_FORMS = {
     'user_token': 'allauth.account.forms.UserTokenForm',
 }
 
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
-SIGNUP_REDIREC_URL = '/'
-LOGOUT_REDIRECT_URL = 'account_login'
+LOGOUT_REDIRECT_URL = '/'
 
-
+LANGUAGE_CODE = 'pt-br'
 '''ACCOUNT_RATE_LIMITS = {
     "change_password": "5/m",
     "manage_email": "10/m",
@@ -143,7 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+DEBUG
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -168,3 +171,5 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#------REVISITAR-------#
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

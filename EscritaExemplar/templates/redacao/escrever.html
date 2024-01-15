@@ -1,0 +1,28 @@
+{% extends 'base2.html' %}
+
+{% block center %}
+    <div class="container">
+        <div class="col-lg-4 mx-auto text-center">
+            <div>
+                <h2 style="font-family: 'Libre Baskerville', serif; color: orange;"> EscritaExemplar </h2>
+                <p>Redação</p>
+            </div>        
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.titulo.id_for_label }}">Título:</label>
+                    {{ form.titulo }}
+                </div>
+            
+                <div class="form-group">
+                    <label for="{{ form.redacao.id_for_label }}">Redação:</label>
+                    {{ form.redacao }}
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="background-color:#CD750D;color: white ;"> Enviar </button>
+            </form> 
+        </div>
+    </div>
+        
+{% endblock %}
+   
